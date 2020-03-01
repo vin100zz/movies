@@ -14,7 +14,7 @@
 }
 html, input {
   font-family: arial;
-  font-size: 12pt;
+  font-size: 11pt;
 }
 ul {
   list-style-type: none;
@@ -29,7 +29,7 @@ img {
 
 /* Icons */
 .far, .fas, .fal {
-  font-size: 12pt;
+  font-size: 11pt;
 }
 .fa-left {
   margin-right: 8px;
