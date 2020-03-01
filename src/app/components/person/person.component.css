@@ -1,0 +1,67 @@
+/* Header */
+.header {
+  display: flex;
+}
+.header > * {
+  width: 50%;
+}
+.header img {
+  height: 380px;
+  object-fit: cover;
+}
+.header .identity {
+  padding: 15px;
+  font-family: title;
+  font-size: 16pt;
+  color: white;
+  background: #222;
+}
+.header .identity .name {
+  margin-bottom: 10px;
+}
+.header .identity .details {
+  color: #aaa;
+  font-size: 12pt;
+}
+
+/* Body */
+.body {
+  padding: 15px;
+}
+.body .section {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 0 10px 0 35px;
+}
+.body .section > .fas {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  color: #666;
+}
+.body .section li {
+  padding: 6px 2px;
+}
+.body .section li:first-child {
+  padding-top: 0;
+}
+
+.body .section .title {
+  margin-right: 10px;
+  margin-bottom: 2px;
+}
+.body .section .year,
+.body .section .rating,
+.body .section .character
+ {
+  color: #999;
+  font-size: 11pt;
+  margin-right: 15px;
+}
+.body .section .year,
+.body .section .rating {
+  display: inline-block;
+}
+.body .section .character {
+  margin-top: 2px;
+}

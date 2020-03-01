@@ -1,0 +1,32 @@
+<div class="body">
+  <ul>
+    <li *ngFor="let tag of tags" class="tag">
+      <div>{{tag.label}}</div>
+      <ul>
+        <li *ngFor="let movie of tag.shows" class="movie">
+          <a [routerLink]="movie.type === 'M' ? ['/movie/' + movie.id] : ['/serie/' + movie.id]">
+            <div class="title">{{movie.title}}</div>
+            <!--<div class="details">
+              <div class="year">
+                <i class="far fa-calendar-alt fa-left"></i>
+                <span>{{movie.releaseYear}}</span>
+              </div>
+              <div class="rating">
+                <i class="fas fa-star fa-left"></i>
+                <span>{{movie.rating}}</span>
+              </div>
+            </div>
+            <div class="tags">
+              <div class="button watched active" *ngIf="movie.watched">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="button to-watch active" *ngIf="movie.toWatch">
+                <i class="fas fa-exclamation"></i>
+              </div>
+            </div>-->
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

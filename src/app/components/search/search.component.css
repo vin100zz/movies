@@ -1,0 +1,35 @@
+/* Header */
+.header {
+  position: relative;
+  color: white;
+  background: #222;
+}
+.header input {
+  width: calc(100% - 40px);
+  margin: 20px;
+  padding: 10px 10px 10px 35px;
+  color: white;
+  background: #222;
+  border: 1px solid #aaa;
+}
+.header .fas {
+  position: absolute;
+  top: 35px;
+  left: 30px;
+  color: #aaa;
+}
+
+/* Body */
+.body img {
+  width: 50px;
+}
+.body .result-details {
+  display: inline-block;
+  width: calc(100% - 110px);
+  height: 50px;
+  line-height: 50px;
+  padding: 0 15px;
+}
+.body li:not(:last-child) {
+  border-bottom: 1px solid #aaa;
+}

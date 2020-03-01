@@ -1,0 +1,40 @@
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: black;
+  color: white;
+  font-family: header;
+  font-size: 24pt;
+  padding: 5px;
+  z-index: 2;
+}
+.app-body {
+  position: absolute;
+  top: 50px;
+  bottom: 40px;
+  left: 0;
+  right: 0; 
+}
+.app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: black;
+  color: white;
+  z-index: 2;
+}
+.app-footer li {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  padding-top: 10px;
+}
+.app-footer .fas {
+  color: white;
+  font-size: 16pt;
+}

@@ -1,1 +1,79 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "title";
+  src: url('sansation.ttf');
+ }
+ @font-face {
+  font-family: "header";
+  src: url('silent-asia.otf');
+ }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, input {
+  font-family: arial;
+  font-size: 12pt;
+}
+ul {
+  list-style-type: none;
+}
+body, a {
+  color: #111;
+  text-decoration: none;
+}
+img {
+  vertical-align: top;
+}
+
+/* Icons */
+.far, .fas, .fal {
+  font-size: 12pt;
+}
+.fa-left {
+  margin-right: 8px;
+}
+
+/* Buttons */
+.button {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 100%;
+  text-align: center;
+}
+.button i {
+  color: white;
+}
+
+.button .far, .button .fas, .button .fal {
+  font-size: 10pt;
+}
+.button:hover {
+  filter: brightness(115%);
+}
+
+.button {
+  border: 1px solid;
+}
+.button.watched {
+  border-color: dodgerblue;
+}
+.button.watched i {
+  color: dodgerblue;
+}
+
+.button.active i {
+  color: white;
+}
+.button.watched.active {
+  background-color: dodgerblue;
+}
+.button.to-watch.active {
+  background-color: crimson;
+}
+
+.button.home {
+  background-color: #222;
+}

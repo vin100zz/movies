@@ -1,0 +1,59 @@
+<div *ngIf="person">
+
+
+  <div class="header">
+    <img [src]="'http://image.tmdb.org/t/p/w500/' + person.profilePath" />
+    <div class="identity">
+      <div class="name">{{person.name}}</div>
+      <div class="details">
+        <i class="far fa-calendar-alt fa-left"></i>
+        <span>{{person.birthYear}}</span>
+        <span *ngIf="person.deathYear"> - {{person.deathYear}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="section directions" *ngIf="person.directions.length">
+      <i class="fas fa-video"></i>
+      <ul>
+        <li *ngFor="let direction of person.directions">
+          <a routerLink="/{{direction.isMovie ? 'movie' : 'serie'}}/{{direction.movieId}}">
+            <div class="title">{{direction.title}}</div>
+            <div class="year">
+              <i class="far fa-calendar-alt fa-left"></i>
+              <span>{{direction.releaseYear}}</span>
+            </div>
+            <div class="rating">
+              <i class="fas fa-star fa-left"></i>
+              <span>{{direction.rating}}</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section casts" *ngIf="person.casts.length">
+      <i class="fas fa-user"></i>
+      <ul>
+        <li *ngFor="let cast of person.casts">
+          <a routerLink="/{{cast.isMovie ? 'movie' : 'serie'}}/{{cast.movieId}}">
+            <div class="title">{{cast.title}}</div>
+            <div class="year">
+              <i class="far fa-calendar-alt fa-left"></i>
+              <span>{{cast.releaseYear}}</span>
+            </div>
+            <div class="rating">
+              <i class="fas fa-star fa-left"></i>
+              <span>{{cast.rating}}</span>
+            </div>
+          </a>
+          <div class="character">{{cast.character}}</div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>

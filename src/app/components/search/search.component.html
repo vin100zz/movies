@@ -1,0 +1,15 @@
+<div class="header">
+  <input #searchText (keyup)="onChange(searchText.value)">
+  <i class="fas fa-search"></i>
+</div>
+
+<div class="body">
+  <ul>
+    <li *ngFor="let result of results">
+      <!--<img [src]="'http://image.tmdb.org/t/p/w500/' + result.picture" />-->
+      <div class="result-details">
+        <a routerLink="{{result.link}}">{{result.label}}</a>
+      </div>
+    </li>
+  </ul>
+</div>

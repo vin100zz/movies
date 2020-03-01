@@ -1,0 +1,95 @@
+<div *ngIf="movie">
+
+  <img [src]="'http://image.tmdb.org/t/p/w500/' + movie.backgroundPath" />
+
+  <!--<ngb-carousel *ngIf="images">
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="images[0]" alt="Random first slide">
+      </div>
+      <div class="carousel-caption">
+        <h3>First slide label</h3>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="images[1]" alt="Random second slide">
+      </div>
+      <div class="carousel-caption">
+        <h3>Second slide label</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="images[2]" alt="Random third slide">
+      </div>
+      <div class="carousel-caption">
+        <h3>Third slide label</h3>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>-->
+
+  <div class="header">
+    <div class="title">{{movie.title}}</div>
+    <div class="details">
+      <div>
+        <i class="far fa-calendar-alt fa-left"></i>
+        <span>{{movie.releaseYear}}</span>
+      </div>
+      <div>
+        <i class="fas fa-star fa-left"></i>
+        <span>{{movie.rating.toFixed(1)}}</span>
+      </div>
+    </div>
+
+    <div class="button watched" [ngClass]="movie.watched ? 'active' : ''" (click)="toggleWatched()">
+      <i class="fas fa-check"></i>
+    </div>
+  </div>
+
+  <div class="tags">
+    <ul>
+      <li *ngFor="let tag of tags" class="tag" [ngClass]="movie.tags.includes(tag.id) ? 'active' : ''">
+        <span (click)="switchTag(tag.id)">{{tag.label}}</span>
+        <!-- <span class="delete-tag" (click)="deleteTag(tag)">x</span> -->
+      </li>
+    </ul>
+  </div>
+
+  <div class="body">
+
+    <div class="section directors">
+      <i class="fas fa-video"></i>
+      <ul>
+        <li *ngFor="let direction of movie.directions">
+          <a routerLink="/person/{{direction.personId}}">{{direction.personName}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section actors">
+      <i class="fas fa-user"></i>
+      <ul>
+        <li *ngFor="let cast of movie.casts">
+          <div class="actor">
+            <a routerLink="/person/{{cast.personId}}">{{cast.personName}}</a>
+          </div>
+          <div class="character">{{cast.character}}</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section summary">
+      <i class="fas fa-quote-right"></i>
+      <div class="tagline">{{movie.tagline}}</div>
+      <div class="overview">{{movie.overview}}</div>
+    </div>
+
+  </div>
+
+  <img [src]="'http://image.tmdb.org/t/p/w500/' + movie.posterPath" />
+
+</div>

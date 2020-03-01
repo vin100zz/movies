@@ -1,0 +1,46 @@
+.tag {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.tag > div {
+  display: inline-block;
+  padding: 5px 15px;
+  margin: 5px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: brown;
+  color: white;
+}
+
+.movie {
+  padding: 10px;
+}
+
+.movie .title {
+  font-family: title;
+  margin-bottom: 5px;
+}
+.movie .details {
+  color: #aaa;
+  margin-bottom: 5px;
+}
+.movie .details > div {
+  display: inline-block;
+  margin-right: 20px;
+}
+.movie .details .year {
+  font-family: title;
+  width: 65px;
+}
+.movie .details .rating {
+  font-family: title;
+  width: 55px;
+}
+.movie .tags > * {
+  display: inline-block;
+  margin-right: 15px;
+}
+.movie .tags .button {
+ zoom: 0.5;
+}
