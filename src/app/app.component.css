@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   height: 50px;
-  background: black;
+  background: #222;
   color: white;
   font-family: header;
   font-size: 24pt;
@@ -24,7 +24,8 @@
   left: 0;
   right: 0;
   height: 30px;
-  background: black;
+  margin: 0;
+  background: #222;
   color: white;
   z-index: 2;
 }
@@ -32,7 +33,7 @@
   display: inline-block;
   width: 50%;
   text-align: center;
-  padding-top: 8px;
+  padding-top: 4px;
 }
 .app-footer .fas {
   color: white;

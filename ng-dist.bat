@@ -1,1 +1,1 @@
-ng build --base-href=/ve/series/
+ng build --base-href=/ve/movies/

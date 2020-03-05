@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { MovieService } from '../../services/movie.service';
 import { TagService } from '../../services/tag.service';
@@ -19,13 +20,16 @@ export class MovieComponent implements OnInit {
 
   tags: Tag[];
 
-  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  youtubeLink: SafeResourceUrl;
 
-  constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private tagService: TagService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private domSanitizer: DomSanitizer, private movieService: MovieService, private tagService: TagService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.movieService.get(params.id).subscribe(movie => this.movie = movie);
+      this.movieService.get(params.id).subscribe(movie => {
+        this.movie = movie;
+        this.youtubeLink = this.domSanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${movie.youtubeId}`);
+      });
       this.tagService.list().subscribe(tags => this.tags = tags);
     });
   }
@@ -39,7 +43,7 @@ export class MovieComponent implements OnInit {
     });
   }
 
-  switchTag(tagId: string) {
+  toggleTag(tagId: string): void {
     this.save().subscribe(() => {
       if (this.movie.tags.includes(tagId)) {
         this.tagService.untagShow(this.movie.id, this.movie.type, tagId).subscribe(() =>
@@ -51,26 +55,8 @@ export class MovieComponent implements OnInit {
     });
   }
 
-  toggleWatched(): void {
-    /* if (!this.movie.inDb) {
-       this.movie.watched = true;
-       this.save();
-     } else {
-       this.movieService.update(this.movie.id, !this.movie.watched, this.movie.toWatch).subscribe(movie => {
-         this.movie = movie;
-       });
-     }*/
-  }
-
-  toggleToWatch(): void {
-    /*if (!this.movie.inDb) {
-       this.movie.toWatch = true;
-      this.save();
-    } else {
-      this.movieService.update(this.movie.id, this.movie.watched, !this.movie.toWatch).subscribe(movie => {
-        this.movie = movie;
-      });
-    }*/
+  getTag(tagId: string): Tag {
+    return this.tags.find(t => t.id === tagId);
   }
 
 }

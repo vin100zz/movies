@@ -1,30 +1,49 @@
 img {
   width: 100%;
 }
+.chapter {
+  border-bottom: 1px solid #ccc;
+}
+
+.gradient {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  margin-top: -50px;
+  background: linear-gradient(0deg, rgba(32,32,32,1) 0%, rgba(32,32,32,0) 100%);
+}
 
 /* Header */
 .header {
   position: relative;
-  padding: 15px;
+  padding: 10px;
   font-family: title;
-  font-size: 16pt;
   color: white;
   background: #222;
 }
+.header .poster {
+  display: inline-block;
+  width: 45%;
+  margin-top: -20px;
+}
+.header .movie-header {
+  display: inline-block;
+  width: 55%;
+  padding-left: 10px;
+}
 .header .title {
-  width: 375px;
+  font-size: 140%;
+  margin-bottom: 5px;
 }
 .header .details {
   color: #aaa;
 }
 .header .details > div {
-  display: inline-block;
-  font-size: 12pt;
-  margin-right: 20px;
+  margin-bottom: 5px;
 }
 .header .button {
   position: absolute;
-  top: 20px;
+  bottom: 20px;
   right: 15px;
   cursor: pointer;
 }
@@ -34,24 +53,52 @@ img {
 .tags {
   padding: 10px;
 }
-.tag {
+.tags > * {
   display: inline-block;
-  font-size: 12pt;
-  padding: 5px 15px;
+}
+
+.tags .tag {
+  display: inline-block;
+  padding: 3px 12px;
   margin: 5px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   background: #ccc;
 }
-
-.tag.active {
+.tags .tag.active {
   background: brown;
 }
-.tag.active * {
+.tags .tag.active * {
   color: white;
 }
-.tag .delete-tag {
+.tags .tag .delete-tag {
   margin-left: 10px;
+}
+
+.tags #dropdown button {
+  margin-left: 5px;
+  padding: 5px;
+  border: none;
+  background: none;
+  color: brown;
+}
+.tags #dropdown ul {
+  padding: 5px;
+}
+.tags #dropdown li {
+  padding: 5px;
+}
+.tags #dropdown li:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+.tags #dropdown li > * {
+  display: inline-block;
+}
+.tags #dropdown li .selected {
+  margin-right: 10px;
+}
+.tags #dropdown li .selected:not(.active) {
+  visibility: hidden;
 }
 
 
@@ -80,7 +127,6 @@ img {
 }
 .actors .character {
   color: #666;
-  font-size: 12pt;
 }
 .summary .tagline {
   color: #666;

@@ -12,6 +12,9 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +28,9 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserModule
+    BrowserModule,
+    NgbCarouselModule,
+    NgbDropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -34,6 +34,9 @@ export class Show {
   backgroundPath: string;
   posterPath: string;
 
+  backgrounds: string[];
+  youtubeId: string;
+
   directions: Direction[];
   casts: Cast[];
 
@@ -54,7 +57,12 @@ export class Show {
     this.rating = data['vote_average'];
 
     this.backgroundPath = data['backdrop_path'];
-    this.posterPath = data['poster_path'];
+    this.posterPath = 'http://image.tmdb.org/t/p/w500/' + data['poster_path'];
+
+    this.backgrounds = ((data['images'] || {}).backdrops || []).map(x => 'http://image.tmdb.org/t/p/w500/' + x.file_path);
+
+    let videos = ((data['videos'] || {}).results || []);
+    this.youtubeId = videos.length ? videos[0].key : null;
 
     this.directions = data['credits']['crew']
       .filter(crewdata => crewdata.job === 'Director')
