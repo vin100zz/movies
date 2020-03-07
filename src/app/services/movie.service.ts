@@ -25,10 +25,6 @@ export class MovieService {
     return this.showService.update<Movie>(id, Movie.TYPE, watched, toWatch, this.mapDto);
   }
 
-  get(id: String): Observable<Movie> {
-    return this.showService.get<Movie>(id, Movie.TYPE, Movie.TMDB_KEY, this.mapDto, this.mapData);
-  }
-
   delete(id: string): void {
     this.showService.delete(id, Movie.TYPE);
   }

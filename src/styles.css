@@ -29,8 +29,8 @@ img {
 }
 
 /* Icons */
-.far, .fas, .fal,
-.button .far, .button .fas, .button .fal {
+i,
+.button i {
   font-size: 75%;
 }
 .fa-left {

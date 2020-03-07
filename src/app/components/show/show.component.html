@@ -1,0 +1,109 @@
+<div *ngIf="show">
+
+  <ngb-carousel [showNavigationIndicators]="false">
+    <ng-template *ngFor="let background of show.backgrounds" ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="background">
+      </div>
+    </ng-template>
+  </ngb-carousel>
+
+  <div class="gradient"></div>
+
+  <div class="header">
+    <img [src]="show.posterPath" class="poster" />
+    <div class="show-header">
+      <div class="title">{{show.title}}</div>
+      <div class="details">
+        <div *ngIf="show.releaseYear">
+          <i class="far fa-calendar-alt fa-left"></i>
+          <span>{{show.releaseYear}}</span>
+        </div>
+        <div *ngIf="show.firstYear">
+          <i class="far fa-calendar-alt fa-left"></i>
+          <span>{{show.firstYear}} - {{show.lastYear}}</span>
+        </div>
+        <div>
+          <i class="fas fa-star fa-left"></i>
+          <span>{{show.rating.toFixed(1)}}</span>
+        </div>
+        <div *ngIf="show.duration">
+          <i class="far fa-clock fa-left"></i>
+          <span>{{show.duration}} min</span>
+        </div>
+        <div *ngIf="show.nbSeasons">
+          <i class="far fa-clock fa-left"></i>
+          <span>{{show.nbSeasons}} seasons</span>
+          <br />
+          <span>{{show.nbEpisodes}} episodes</span>
+        </div>
+      </div>
+
+      <a *ngIf="youtubeLink" [href]="youtubeLink" class="youtube">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <div class="button watched" [ngClass]="show.watched ? 'active' : 'inactive'" (click)="toggleWatched()">
+        <i class="fas fa-check"></i>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="show.genres.length" class="section genres">
+    <div class="title">Genres</div>
+    <ul>
+      <li *ngFor="let genre of show.genres">
+        <span>{{genre}}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section tags">
+    <div class="title">Tags</div>
+    <ul>
+      <li *ngFor="let tag of show.tags" class="tag">
+        <span>{{getTag(tag).label}}</span>
+      </li>
+    </ul>
+
+    <div ngbDropdown id="dropdown">
+      <button id="dropdownForm1" ngbDropdownToggle>
+      </button>
+      <ul ngbDropdownMenu aria-labelledby="dropdownForm1">
+        <li *ngFor="let tag of tags" (click)="toggleTag(tag.id)" class="tag"
+          [ngClass]="show.tags.includes(tag.id) ? 'active' : 'inactive'">
+          <div>{{tag.label}}</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="show.directions.length" class="section gallery direction">
+    <div class="title">Direction</div>
+    <ul>
+      <li *ngFor="let direction of show.directions" routerLink="/person/{{direction.personId}}">
+        <img [src]="direction.picture" />
+        <div class="name">{{direction.personName}}</div>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="show.casts.length" class="section gallery cast">
+    <div class="title">Cast</div>
+    <ul>
+      <li *ngFor="let cast of show.casts" routerLink="/person/{{cast.personId}}">
+        <img [src]="cast.picture" />
+        <div class="name">{{cast.personName}}</div>
+        <div class="role">{{cast.character}}</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section summary">
+    <div *ngIf="show.tagline" class="title">
+      <i class="fas fa-quote-right"></i>
+      {{show.tagline}}
+    </div>
+    <div class="overview">{{show.overview}}</div>
+  </div>
+
+</div>

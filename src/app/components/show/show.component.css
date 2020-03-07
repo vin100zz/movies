@@ -1,0 +1,204 @@
+/* Carousel */
+.carousel img {
+  width: 100%;
+}
+
+
+/* Header */
+.gradient {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  margin-top: -50px;
+  background: linear-gradient(0deg, rgba(32,32,32,1) 0%, rgba(32,32,32,0) 100%);
+}
+.header {
+  position: relative;
+  padding: 0 10px 10px 10px;
+  font-family: title;
+  color: white;
+  background: #222;
+}
+.header .poster {
+  display: inline-block;
+  width: 45%;
+  margin-top: -20px;
+}
+.header .show-header {
+  display: inline-block;
+  width: 55%;
+  padding-left: 10px;
+}
+.header .title {
+  font-size: 120%;
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+.header .details {
+  color: #aaa;
+}
+.header .details > div {
+  margin-bottom: 5px;
+}
+.header .youtube {
+  position: absolute;
+  bottom: 0;
+  left: 200px;
+  color: red;
+  font-size: 44pt;
+}
+.header .youtube i:after {
+  content: '';
+  display: block;
+  margin-top: -30px;
+  margin-left: 10px;
+  width: 25px;
+  height: 20px;
+  background: white;
+}
+.header .watched {
+  position: absolute;
+  bottom: 20px;
+  right: 15px;
+  cursor: pointer;
+}
+
+
+/* Section */
+.section {
+  padding: 10px 10px 15px 10px;
+  border-bottom: 1px solid #ccc;
+}
+.section .title {
+  margin-bottom: 5px;
+  font-size: 80%;
+  color: #666;
+  text-transform: uppercase;
+}
+
+
+/* Genres */
+.genres li {
+  display: inline-block;
+  font-size: 80%;
+  background: #ccc;
+  color: #666;
+  padding: 2px 7px;
+  margin-right: 7px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+
+/* Tag */
+.tags > ul {
+  display: inline-block;
+}
+.tags > ul li {
+  display: inline-block;
+}
+.tags .tag {
+  position: relative;
+  font-size: 80%;
+  background: brown;
+  color: white;
+  padding: 2px 12px;
+  margin-right: 7px;
+  margin-left: 12px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.tags .tag:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -12px;
+  width: 0;
+  height: 0;
+  border-color: transparent brown transparent transparent;
+  border-style: solid;
+  border-width: 9px 12px 12px 0;
+ }
+ .tags .tag:after {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 2px;
+  background: #fff;
+ }
+
+ .tags #dropdown {
+   display: inline-block;
+ }
+
+.tags #dropdown button {
+  padding: 5px;
+  border: none;
+  background: none;
+}
+.tags #dropdown ul {
+  padding: 5px;
+}
+.tags #dropdown li {
+  display: inline-block;
+}
+.tags #dropdown .tag.inactive {
+  background: #ccc;
+  color: #666;
+}
+.tags #dropdown .tag.inactive:before {
+  border-color: transparent #ccc transparent transparent;
+}
+
+
+/* Gallery */
+.gallery ul {
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.gallery li {
+  display: inline-block;
+  width: 100px;
+  margin-right: 5px;
+  text-align: center;
+  vertical-align: top;
+}
+.gallery li img {
+  width: 100%;
+  margin-bottom: 5px;
+}
+.gallery li .name {
+  font-size: 80%;
+  margin-bottom: 2px;
+  white-space: normal;
+}
+.gallery li .role {
+  font-size: 70%;
+  color: #666;
+  white-space: normal;
+}
+
+
+/* Summary */
+.summary {
+  margin-bottom: 20px
+}
+.summary .title {
+  font-size: 100%;
+}
+.summary .title i {
+  margin-right: 5px;
+}
+.summary .tagline {
+  color: #666;
+  font-family: title;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+.summary .overview {
+  text-align: justify;
+}
+

@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
         this.results = searchResultsDto['results'].slice(0, 10).map(resultDto => {
           return {
             type: resultDto.media_type,
-            link: '/' + (resultDto.media_type === 'tv' ? 'serie' : resultDto.media_type) + '/' + resultDto.id,
+            link: '/show/' + (resultDto.media_type === 'tv' ? 'S' : 'M') + '/' + resultDto.id,
             label: resultDto.media_type === 'movie' ? resultDto.title : resultDto.name,
             picture: resultDto.media_type === 'person' ? resultDto.profile_path : resultDto.poster_path
           };

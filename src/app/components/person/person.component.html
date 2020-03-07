@@ -19,7 +19,7 @@
       <i class="fas fa-video"></i>
       <ul>
         <li *ngFor="let direction of person.directions">
-          <a routerLink="/{{direction.isMovie ? 'movie' : 'serie'}}/{{direction.movieId}}">
+          <a routerLink="/show/{{direction.isMovie ? 'M' : 'S'}}/{{direction.movieId}}">
             <div class="title">{{direction.title}}</div>
             <div class="year">
               <i class="far fa-calendar-alt fa-left"></i>
@@ -38,7 +38,7 @@
       <i class="fas fa-user"></i>
       <ul>
         <li *ngFor="let cast of person.casts">
-          <a routerLink="/{{cast.isMovie ? 'movie' : 'serie'}}/{{cast.movieId}}">
+          <a routerLink="/show/{{cast.isMovie ? 'M' : 'S'}}/{{cast.movieId}}">
             <div class="title">{{cast.title}}</div>
             <div class="year">
               <i class="far fa-calendar-alt fa-left"></i>

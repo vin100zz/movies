@@ -1,5 +1,5 @@
 
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -48,7 +48,14 @@ export class ShowService {
     return this.httpClient.get<Object[]>('server/list.php?ts=' + Date.now());
   }
 
-  save<T>(show: Show, mapDtoFn: (dto: Object) => T): Observable<T> {
+  save(show: Show): Observable<Show> {
+    if (show.type === Movie.TYPE) {
+      return this.saveAs<Movie>(show, this.mapMovieDto);
+    }
+    return this.saveAs<Serie>(show, this.mapSerieDto);
+  }
+
+  saveAs<T>(show: Show, mapDtoFn: (dto: Object) => T): Observable<T> {
     return this.httpClient.post<T>('server/save.php?ts=' + Date.now() + '&type=' + show.type + '&id=' + show.id, show.data, httpOptions).pipe(map(mapDtoFn));
   }
 
@@ -56,7 +63,14 @@ export class ShowService {
     return this.httpClient.get<T>('server/update.php?ts=' + Date.now() + '&type=' + type + '&id=' + id + '&watched=' + watched + '&toWatch=' + toWatch).pipe(map(mapDtoFn));
   }
 
-  get<T>(id: String, type: string, tmdbKey: string, mapDtoFn: (dto: Object) => T, mapDataFn: (dto: Object) => T): Observable<T> {
+  get(id: String, type: string): Observable<Show> {
+    if (type === Movie.TYPE) {
+      return this.getAs<Movie>(id, type, Movie.TMDB_KEY, this.mapMovieDto, this.mapMovieData);
+    }
+    return this.getAs<Serie>(id, type, Serie.TMDB_KEY, this.mapSerieDto, this.mapSerieData);
+  }
+
+  getAs<T>(id: String, type: string, tmdbKey: string, mapDtoFn: (dto: Object) => T, mapDataFn: (dto: Object) => T): Observable<T> {
     return new Observable<T>(observer => {
       this.httpClient.get<T>('server/get.php?ts=' + Date.now() + '&type=' + type + '&id=' + id).subscribe(dto => {
         if (dto) {
@@ -64,7 +78,7 @@ export class ShowService {
           observer.complete();
           return;
         }
-        this.httpClient.get('https://api.themoviedb.org/3/' + tmdbKey + '/' + id + '?api_key=7aac1d19d45ad4753555583cabc0832d&append_to_response=credits,images,videos').pipe(
+        this.httpClient.get('https://api.themoviedb.org/3/' + tmdbKey + '/' + id + '?api_key=7aac1d19d45ad4753555583cabc0832d&append_to_response=credits,images,videos,recommendations,keywords,similar').pipe(
           map(data => {
             observer.next(mapDataFn(data));
             observer.complete();
@@ -75,6 +89,33 @@ export class ShowService {
 
   delete(id: string, type: string): void {
     this.httpClient.get('server/delete.php?ts=' + Date.now() + '&type=' + type + '&id=' + id);
+  }
+
+  toggleWatched(show: Show): Observable<Show> {
+    if (show.type === Movie.TYPE) {
+      return this.toggleWatchedAs<Movie>(show, this.mapMovieDto);
+    }
+    return this.toggleWatchedAs<Serie>(show, this.mapSerieDto);
+  }
+
+  toggleWatchedAs<T>(show: Show, mapDtoFn: (dto: Object) => T): Observable<T> {
+    return this.httpClient.get<T>('server/set_watched.php?ts=' + Date.now() + '&type=' + show.type + '&id=' + show.id + '&watched=' + !show.watched).pipe(map(mapDtoFn));
+  }
+
+  mapMovieDto(dto: Object): Movie {
+    return new Movie(dto['data'], dto['watched'] === 'true', dto['tags']);
+  }
+
+  mapMovieData(data: Object): Movie {
+    return new Movie(data, false, []);
+  }
+
+  mapSerieDto(dto: Object): Serie {
+    return new Serie(dto['data'], dto['watched'] === 'true', dto['tags']);
+  }
+
+  mapSerieData(data: Object): Serie {
+    return new Serie(data, false, []);
   }
 
 }

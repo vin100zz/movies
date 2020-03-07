@@ -31,9 +31,9 @@ export class MoviesComponent implements OnInit {
       this.tags = tags.map(tag => {
         tag['shows'] = tag['shows'].map(show => {
           if (show['show_type'] === Movie.TYPE) {
-            return new Movie(show['data'], true, show['tags']);
+            return new Movie(show['data'], show['watched'] === 'true', show['tags']);
           }
-          return new Serie(show['data'], true, show['tags']);
+          return new Serie(show['data'], show['watched'] === 'true', show['tags']);
         });
         return tag;
       })
