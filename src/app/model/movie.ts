@@ -8,7 +8,7 @@ export class Movie extends Show {
     super(data, Movie.TYPE, watched, tags);
 
     this.originalTitle = data['original_title'];
-    this.releaseYear = parseInt(data['release_date'].substr(0, 4), 10);
+    this.releaseYear = parseInt((data['release_date'] || '').substr(0, 4), 10);
     this.tagline = data['tagline'];
     this.overview = data['overview'];
     this.duration = data['runtime'];

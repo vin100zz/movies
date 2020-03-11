@@ -28,6 +28,63 @@ img {
   vertical-align: top;
 }
 
+
+/* Gallery */
+.app-gallery.app-gallery-scroll ul {
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.app-gallery ul {
+  display: flex;
+}
+.app-gallery.app-gallery-wrap ul {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.app-gallery li {
+  width: 100px;
+  margin-right: 5px;
+  text-align: center;
+  vertical-align: top;
+}
+.app-gallery.app-gallery-wrap li {
+  margin-bottom: 15px;
+}
+.app-gallery li img {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 5px;
+}
+.app-gallery li .name {
+  font-size: 80%;
+  margin-bottom: 2px;
+  white-space: normal;
+}
+.app-gallery li .role {
+  font-size: 70%;
+  color: #666;
+  white-space: normal;
+}
+.app-gallery li .role i {
+  margin-left: 7px;
+  margin-right: 2px;
+}
+
+
+/* Section */
+.app-section {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.app-section .title {
+  margin-bottom: 5px;
+  font-size: 80%;
+  color: #666;
+  text-transform: uppercase;
+}
+
+
 /* Icons */
 i,
 .button i {

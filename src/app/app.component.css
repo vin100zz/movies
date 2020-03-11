@@ -35,6 +35,8 @@
   text-align: center;
   padding-top: 4px;
 }
-.app-footer .fas {
+.app-footer i {
+  font-size: 110%;
   color: white;
 }
+

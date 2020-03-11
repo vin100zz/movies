@@ -15,7 +15,6 @@
 .header {
   position: relative;
   padding: 0 10px 10px 10px;
-  font-family: title;
   color: white;
   background: #222;
 }
@@ -31,6 +30,7 @@
 }
 .header .title {
   font-size: 120%;
+  font-family: title;
   margin-top: -5px;
   margin-bottom: 5px;
 }
@@ -39,6 +39,9 @@
 }
 .header .details > div {
   margin-bottom: 5px;
+}
+.header .nb-episodes {
+  margin-left: 18px;
 }
 .header .youtube {
   position: absolute;
@@ -64,27 +67,18 @@
 }
 
 
-/* Section */
-.section {
-  padding: 10px 10px 15px 10px;
-  border-bottom: 1px solid #ccc;
-}
-.section .title {
-  margin-bottom: 5px;
-  font-size: 80%;
-  color: #666;
-  text-transform: uppercase;
-}
-
-
 /* Genres */
+.genres {
+  margin-top: 15px;
+}
 .genres li {
   display: inline-block;
   font-size: 80%;
-  background: #ccc;
-  color: #666;
+  background: #666;
+  color: #ccc;
   padding: 2px 7px;
   margin-right: 7px;
+  margin-bottom: 2px;
   border-top-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
@@ -154,38 +148,7 @@
 }
 
 
-/* Gallery */
-.gallery ul {
-  white-space: nowrap;
-  overflow-x: auto;
-}
-.gallery li {
-  display: inline-block;
-  width: 100px;
-  margin-right: 5px;
-  text-align: center;
-  vertical-align: top;
-}
-.gallery li img {
-  width: 100%;
-  margin-bottom: 5px;
-}
-.gallery li .name {
-  font-size: 80%;
-  margin-bottom: 2px;
-  white-space: normal;
-}
-.gallery li .role {
-  font-size: 70%;
-  color: #666;
-  white-space: normal;
-}
-
-
 /* Summary */
-.summary {
-  margin-bottom: 20px
-}
 .summary .title {
   font-size: 100%;
 }
@@ -200,5 +163,10 @@
 }
 .summary .overview {
   text-align: justify;
+}
+
+
+.recommendations {
+  margin-bottom: 30px
 }
 

@@ -25,13 +25,36 @@ export class SearchComponent implements OnInit {
         return;
       }
       this.showService.search(query).subscribe(searchResultsDto => {
-        this.results = searchResultsDto['results'].slice(0, 10).map(resultDto => {
-          return {
-            type: resultDto.media_type,
-            link: '/show/' + (resultDto.media_type === 'tv' ? 'S' : 'M') + '/' + resultDto.id,
-            label: resultDto.media_type === 'movie' ? resultDto.title : resultDto.name,
-            picture: resultDto.media_type === 'person' ? resultDto.profile_path : resultDto.poster_path
-          };
+        this.results = searchResultsDto['results'].slice(0, 12).map(dto => {
+          if (dto.media_type === 'person') {
+            return {
+              type: dto.media_type,
+              name: dto.name,
+              picture: dto.profile_path,
+              link: '/person/' + dto.id,
+              onerror: 'this.src="assets/empty-person.jpg"'
+            };
+          } else if (dto.media_type === 'movie') {
+            return {
+              type: dto.media_type,
+              name: dto.title,
+              releaseYear: (dto.release_date || '').substr(0, 4),
+              rating: dto.vote_average,
+              picture: dto.poster_path,
+              link: '/show/M/' + dto.id,
+              onerror: 'this.src="assets/empty-show.jpg"'
+            };
+          } else if (dto.media_type === 'tv') {
+            return {
+              type: dto.media_type,
+              name: dto.name,
+              releaseYear: (dto.first_air_date || '').substr(0, 4),
+              rating: dto.vote_average,
+              picture: dto.poster_path,
+              link: '/show/S/' + dto.id,
+              onerror: 'this.src="assets/empty-show.jpg"'
+            };
+          }
         });
       });
     });

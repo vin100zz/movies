@@ -24,6 +24,22 @@ class Cast {
   }
 }
 
+class RelatedShow {
+  showId: number;
+  title: string;
+  releaseYear: number;
+  rating: number;
+  picture: string;
+
+  constructor(data: Object) {
+    this.showId = data['id'];
+    this.title = data['title'] || data['name'];
+    this.releaseYear = parseInt((data['release_date'] || data['first_air_date'] || '').substr(0, 4), 10);
+    this.rating = data['vote_average'];
+    this.picture = 'http://image.tmdb.org/t/p/w500/' + data['poster_path'];
+  }
+}
+
 export class Show {
   data: Object;
   type: string;
@@ -47,6 +63,9 @@ export class Show {
   watched: boolean;
 
   genres: string[];
+
+  similars: RelatedShow[];
+  recommendations: RelatedShow[];
 
   // movie
   originalTitle: string;
@@ -86,13 +105,16 @@ export class Show {
       .map(directordata => new Direction(directordata));
 
     this.casts = data['credits']['cast']
-      .slice(0, 10)
+      .slice(0, 15)
       .map(castdata => new Cast(castdata));
 
 
     this.tags = tags;
 
     this.genres = data['genres'].map(x => x.name);
+
+    this.similars = data['similar'].results.map(x => new RelatedShow(x));
+    this.recommendations = data['recommendations'].results.map(x => new RelatedShow(x));
   }
 
 }
