@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
-import { ShowService } from '../../services/show.service';
-import { Show } from '../../model/show';
-
 import { Movie } from '../../model/movie';
 import { Serie } from '../../model/serie';
+import { Show } from '../../model/show';
+import { TagService } from '../../services/tag.service';
+
+
 
 @Component({
   selector: 'app-movies',
@@ -21,13 +21,13 @@ export class MoviesComponent implements OnInit {
   sortCriterion: string = 'rating';
   sortAsc = false;
 
-  tags;
+  tags: Object[];
 
-  constructor(private showService: ShowService) {
+  constructor(private tagService: TagService) {
   }
 
   ngOnInit() {
-    this.showService.list().subscribe(tags => {
+    this.tagService.list().subscribe(tags => {
       this.tags = tags.map(tag => {
         tag['shows'] = tag['shows'].map(show => {
           if (show['show_type'] === Movie.TYPE) {

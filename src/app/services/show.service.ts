@@ -1,15 +1,14 @@
 
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-
-
-import { HttpHeaders } from '@angular/common/http';
-
-import { Show } from './../model/show';
+import { map } from 'rxjs/operators';
 import { Movie } from '../model/movie';
 import { Serie } from '../model/serie';
+import { Show } from './../model/show';
+
+
+
 
 
 const httpOptions = {
@@ -44,8 +43,8 @@ export class ShowService {
   }
   */
 
-  list() {
-    return this.httpClient.get<Object[]>('server/list.php?ts=' + Date.now());
+  listShowsWithTags() {
+    return this.httpClient.get<Object[]>('server/list_shows_with_tags.php?ts=' + Date.now());
   }
 
   save(show: Show): Observable<Show> {

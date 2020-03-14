@@ -24,6 +24,7 @@
       <li *ngFor="let direction of person.directions"
         routerLink="/show/{{direction.isMovie ? 'M' : 'S'}}/{{direction.movieId}}">
         <img [src]="direction.picture" onerror="this.src='assets/empty-show.jpg'" />
+        <div class="poster-mark" [ngClass]="getPosterMark(direction.showId, direction.showType)"></div>
         <div class="name">{{direction.title}}</div>
         <div class="role">{{direction.releaseYear}} <i class="fas fa-star"></i>{{direction.rating}}</div>
       </li>
@@ -35,6 +36,7 @@
     <ul>
       <li *ngFor="let cast of person.casts" routerLink="/show/{{cast.isMovie ? 'M' : 'S'}}/{{cast.movieId}}">
         <img [src]="cast.picture" onerror="this.src='assets/empty-show.jpg'" />
+        <div class="poster-mark" [ngClass]="getPosterMark(cast.showId, cast.showType)"></div>
         <div class="name">{{cast.title}}</div>
         <div class="role">{{cast.releaseYear}} <i class="fas fa-star"></i>{{cast.rating}}</div>
       </li>

@@ -1,9 +1,9 @@
 
-import { debounceTime } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-
-import { ShowService } from '../../services/show.service';
 import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { ShowService } from '../../services/show.service';
+
 
 @Component({
   selector: 'app-search',

@@ -1,11 +1,10 @@
 
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-
+import { map } from 'rxjs/operators';
 import { Tag } from '../model/tag';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,6 +22,10 @@ export class TagService {
 
   list(): Observable<Tag[]> {
     return this.httpClient.get<Object[]>('server/list_tags.php?ts=' + Date.now()).pipe(map(arr => arr.map(dto => new Tag(dto['id'], dto['label']))));
+  }
+
+  listTagsWithShows() {
+    return this.httpClient.get<Object[]>('server/list_tags_with_shows.php?ts=' + Date.now());
   }
 
   tagShow(showId: string, showType: string, tagId: string): Observable<Object> {

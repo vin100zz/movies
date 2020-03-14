@@ -1,6 +1,9 @@
+import { Movie } from './movie';
+import { Serie } from './serie';
 class Direction {
   isMovie: boolean;
-  movieId: number;
+  showId: string;
+  showType: string;
   title: string;
   releaseYear: number;
   rating: number;
@@ -8,7 +11,8 @@ class Direction {
 
   constructor(dto: Object) {
     this.isMovie = dto['media_type'] === 'movie';
-    this.movieId = dto['id'];
+    this.showId = dto['id'] + '';
+    this.showType = dto['media_type'] === 'movie' ? Movie.TYPE : Serie.TYPE;
     this.title = this.isMovie ? dto['title'] : dto['name'];
     this.releaseYear = dto[this.isMovie ? 'release_date' : 'first_air_date'] ? parseInt(dto[this.isMovie ? 'release_date' : 'first_air_date'].substr(0, 4), 10) : null;
     this.rating = dto['vote_average'];
@@ -18,7 +22,8 @@ class Direction {
 
 class Cast {
   isMovie: boolean;
-  movieId: number;
+  showId: string;
+  showType: string;
   title: string;
   releaseYear: number;
   rating: number;
@@ -27,7 +32,8 @@ class Cast {
 
   constructor(dto: Object) {
     this.isMovie = dto['media_type'] === 'movie';
-    this.movieId = dto['id'];
+    this.showId = dto['id'] + '';
+    this.showType = dto['media_type'] === 'movie' ? Movie.TYPE : Serie.TYPE;
     this.title = this.isMovie ? dto['title'] : dto['name'];
     this.releaseYear = dto[this.isMovie ? 'release_date' : 'first_air_date'] ? parseInt(dto[this.isMovie ? 'release_date' : 'first_air_date'].substr(0, 4), 10) : null;
     this.rating = dto['vote_average'];

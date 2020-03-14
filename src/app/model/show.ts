@@ -1,23 +1,23 @@
 class Direction {
-  personId: number;
+  personId: string;
   personName: string;
   picture: string;
 
   constructor(data: Object) {
-    this.personId = data['id'];
+    this.personId = data['id'] + '';
     this.personName = data['name'];
     this.picture = 'http://image.tmdb.org/t/p/w500/' + data['profile_path'];
   }
 }
 
 class Cast {
-  personId: number;
+  personId: string;
   personName: string;
   character: string;
   picture: string;
 
   constructor(data: Object) {
-    this.personId = data['id'];
+    this.personId = data['id'] + '';
     this.personName = data['name'];
     this.character = data['character'];
     this.picture = 'http://image.tmdb.org/t/p/w500/' + data['profile_path'];
@@ -25,14 +25,14 @@ class Cast {
 }
 
 class RelatedShow {
-  showId: number;
+  showId: string;
   title: string;
   releaseYear: number;
   rating: number;
   picture: string;
 
   constructor(data: Object) {
-    this.showId = data['id'];
+    this.showId = data['id'] + '';
     this.title = data['title'] || data['name'];
     this.releaseYear = parseInt((data['release_date'] || data['first_air_date'] || '').substr(0, 4), 10);
     this.rating = data['vote_average'];
