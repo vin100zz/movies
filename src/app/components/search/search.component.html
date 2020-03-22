@@ -3,8 +3,8 @@
   <i class="fas fa-search"></i>
 </div>
 
-<div class="body app-gallery app-gallery-wrap">
-  <ul>
+<div class="body">
+  <ul class="app-gallery wrap">
     <li *ngFor="let result of results" routerLink="{{result.link}}">
       <img [src]="'http://image.tmdb.org/t/p/w500/' + result.picture" onerror="this.src='assets/empty-show.jpg'" />
       <div class="name">{{result.name}}</div>
