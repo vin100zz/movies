@@ -6,15 +6,15 @@ import { NgbCarouselModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GalleryComponent } from './components/common/gallery.component';
-import { MoviesComponent } from './components/movies/movies.component';
 import { PersonComponent } from './components/person/person.component';
 import { SearchComponent } from './components/search/search.component';
 import { ShowComponent } from "./components/show/show.component";
+import { TagsComponent } from './components/tags/tags.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MoviesComponent,
+    TagsComponent,
     ShowComponent,
     SearchComponent,
     PersonComponent,

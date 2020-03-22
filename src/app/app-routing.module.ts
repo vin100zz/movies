@@ -1,18 +1,18 @@
-import { SearchComponent } from './components/search/search.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { MoviesComponent } from './components/movies/movies.component';
-import { ShowComponent } from "./components/show/show.component";
-
 import { PersonComponent } from './components/person/person.component';
+import { SearchComponent } from './components/search/search.component';
+import { ShowComponent } from "./components/show/show.component";
+import { TagsComponent } from './components/tags/tags.component';
+
+
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/movies', pathMatch: 'full' },
+  { path: '', redirectTo: '/tags', pathMatch: 'full' },
 
   { path: 'search', component: SearchComponent },
-  { path: 'movies', component: MoviesComponent },
+  { path: 'tags', component: TagsComponent },
   { path: 'show/:type/:id', component: ShowComponent },
   { path: 'person/:id', component: PersonComponent }
 ];

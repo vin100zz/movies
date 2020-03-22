@@ -1,0 +1,6 @@
+<div class="body">
+  <ul *ngFor="let tag of tags" class="app-section">
+    <div class="title">{{tag.label}}</div>
+    <app-gallery [data]="tag.galleryData"></app-gallery>
+  </ul>
+</div>

@@ -2,6 +2,13 @@
 
 include_once "db.php";
 
+$today = date('Y-m-d', time());
+$dbTodayPath = '../db_backup/shows-' .  $today . '.sqlite';
+
+if (!file_exists($dbTodayPath)) {
+	copy('shows.sqlite', $dbTodayPath);
+}
+
 function getShow($id, $type) {
 	$show = DBAccess::singleRow("
 	  SELECT *
