@@ -75,25 +75,14 @@
     </div>
   </div>
 
-  <div *ngIf="show.directions.length" class="app-section app-gallery app-gallery-scroll direction">
+  <div *ngIf="show.directions.length" class="app-section direction">
     <div class="title">Direction</div>
-    <ul>
-      <li *ngFor="let direction of show.directions" routerLink="/person/{{direction.personId}}">
-        <img [src]="direction.picture" onerror="this.src='assets/empty-show.jpg'" />
-        <div class="name">{{direction.personName}}</div>
-      </li>
-    </ul>
+    <app-gallery [data]="directionGalleryData"></app-gallery>
   </div>
 
-  <div *ngIf="show.casts.length" class="app-section app-gallery app-gallery-scroll cast">
+  <div *ngIf="show.casts.length" class="app-section cast">
     <div class="title">Cast</div>
-    <ul>
-      <li *ngFor="let cast of show.casts" routerLink="/person/{{cast.personId}}">
-        <img [src]="cast.picture" onerror="this.src='assets/empty-show.jpg'" />
-        <div class="name">{{cast.personName}}</div>
-        <div class="role">{{cast.character}}</div>
-      </li>
-    </ul>
+    <app-gallery [data]="castGalleryData"></app-gallery>
   </div>
 
   <div class="app-section summary">
@@ -104,30 +93,14 @@
     <div class="overview">{{show.overview}}</div>
   </div>
 
-  <div *ngIf="show.similars.length" class="app-section app-gallery app-gallery-scroll similar">
+  <div *ngIf="show.similars.length" class="app-section similar">
     <div class="title">Similar</div>
-    <ul>
-      <li *ngFor="let relatedShow of show.similars"
-        routerLink="/show/{{show.type === 'M' ? 'M' : 'S'}}/{{relatedShow.showId}}">
-        <img [src]="relatedShow.picture" onerror="this.src='assets/empty-show.jpg'" />
-        <div class="name">{{relatedShow.title}}</div>
-        <div *ngIf="relatedShow.rating" class="role">{{relatedShow.releaseYear}} <i
-            class="fas fa-star"></i>{{relatedShow.rating}}</div>
-      </li>
-    </ul>
+    <app-gallery [data]="similarGalleryData"></app-gallery>
   </div>
 
-  <div *ngIf="show.recommendations.length" class="app-section app-gallery app-gallery-scroll recommendations">
+  <div *ngIf="show.recommendations.length" class="app-section recommendations">
     <div class="title">Recommendations</div>
-    <ul>
-      <li *ngFor="let relatedShow of show.recommendations"
-        routerLink="/show/{{show.type === 'M' ? 'M' : 'S'}}/{{relatedShow.showId}}">
-        <img [src]="relatedShow.picture" onerror="this.src='assets/empty-show.jpg'" />
-        <div class="name">{{relatedShow.title}}</div>
-        <div *ngIf="relatedShow.rating" class="role">{{relatedShow.releaseYear}} <i
-            class="fas fa-star"></i>{{relatedShow.rating}}</div>
-      </li>
-    </ul>
+    <app-gallery [data]="recommendationGalleryData"></app-gallery>
   </div>
 
 </div>

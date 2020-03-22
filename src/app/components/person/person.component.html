@@ -18,29 +18,14 @@
     </div>
   </div>
 
-  <div *ngIf="person.directions.length" class="app-section app-gallery app-gallery-scroll direction">
+  <div *ngIf="person.directions.length" class="app-section direction">
     <div class="title">Director</div>
-    <ul>
-      <li *ngFor="let direction of person.directions"
-        routerLink="/show/{{direction.isMovie ? 'M' : 'S'}}/{{direction.movieId}}">
-        <img [src]="direction.picture" onerror="this.src='assets/empty-show.jpg'" />
-        <div class="poster-mark" [ngClass]="getPosterMark(direction.showId, direction.showType)"></div>
-        <div class="name">{{direction.title}}</div>
-        <div class="role">{{direction.releaseYear}} <i class="fas fa-star"></i>{{direction.rating}}</div>
-      </li>
-    </ul>
+    <app-gallery [data]="directionGalleryData"></app-gallery>
   </div>
 
-  <div *ngIf="person.casts.length" class="app-section app-gallery app-gallery-scroll cast">
+  <div *ngIf="person.casts.length" class="app-section cast">
     <div class="title">Actor</div>
-    <ul>
-      <li *ngFor="let cast of person.casts" routerLink="/show/{{cast.isMovie ? 'M' : 'S'}}/{{cast.movieId}}">
-        <img [src]="cast.picture" onerror="this.src='assets/empty-show.jpg'" />
-        <div class="poster-mark" [ngClass]="getPosterMark(cast.showId, cast.showType)"></div>
-        <div class="name">{{cast.title}}</div>
-        <div class="role">{{cast.releaseYear}} <i class="fas fa-star"></i>{{cast.rating}}</div>
-      </li>
-    </ul>
+    <app-gallery [data]="castGalleryData"></app-gallery>
   </div>
 
   <div *ngIf="person.biography" class="app-section summary">

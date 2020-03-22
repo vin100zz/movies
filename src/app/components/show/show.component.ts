@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Movie } from 'src/app/model/movie';
+import { Show } from '../../model/show';
+import { Tag } from '../../model/tag';
 import { ShowService } from '../../services/show.service';
 import { TagService } from '../../services/tag.service';
-import { Movie } from '../../model/movie';
-import { Show } from '../../model/show';
 
-import { Tag } from '../../model/tag';
-import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-show',
@@ -22,6 +21,14 @@ export class ShowComponent implements OnInit {
 
   tags: Tag[];
 
+  directionGalleryData: Object;
+
+  castGalleryData: Object;
+
+  similarGalleryData: Object;
+
+  recommendationGalleryData: Object;
+
   youtubeLink: SafeResourceUrl;
 
   constructor(private route: ActivatedRoute, private router: Router, private domSanitizer: DomSanitizer, private showService: ShowService, private tagService: TagService) { }
@@ -30,9 +37,61 @@ export class ShowComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.showService.get(params.id, params.type).subscribe(show => {
         this.show = show;
+
         if (this.show.youtubeId) {
           this.youtubeLink = this.domSanitizer.bypassSecurityTrustResourceUrl(this.show.youtubeId);
         }
+
+        this.directionGalleryData = {
+          mode: 'person',
+          display: 'scroll',
+          items: this.show.directions.map(direction => ({
+            name: direction.personName,
+            link: `/person/${direction.personId}`,
+            picture: direction.picture
+          }))
+        };
+
+        this.castGalleryData = {
+          mode: 'person',
+          display: 'scroll',
+          items: this.show.casts.map(cast => ({
+            name: cast.personName,
+            character: cast.character,
+            link: `/person/${cast.personId}`,
+            picture: cast.picture
+          }))
+        };
+
+        this.similarGalleryData = {
+          mode: 'show',
+          display: 'scroll',
+          items: this.show.similars.map(show => ({
+            showId: show.showId,
+            showType: this.show.type,
+            link: `/show/${this.show.type === Movie.TYPE ? 'M' : 'S'}/${show.showId}`,
+            picture: show.picture,
+            name: show.title,
+            rating: show.rating,
+            releaseYear: show.releaseYear
+          }))
+        };
+
+        this.recommendationGalleryData = {
+          mode: 'show',
+          display: 'scroll',
+          items: this.show.recommendations.map(show => ({
+            showId: show.showId,
+            showType: this.show.type,
+            link: `/show/${this.show.type === Movie.TYPE ? 'M' : 'S'}/${show.showId}`,
+            picture: show.picture,
+            name: show.title,
+            rating: show.rating,
+            releaseYear: show.releaseYear
+          }))
+        };
+
+
       });
       this.tagService.list().subscribe(tags => this.tags = tags);
     });

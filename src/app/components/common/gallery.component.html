@@ -1,0 +1,9 @@
+<ul *ngIf="data && data.items" class="app-gallery {{data.display}}">
+  <li *ngFor="let item of data.items" routerLink="{{item.link}}">
+    <img [src]="item.picture" onerror="this.src='assets/empty-show.jpg'" />
+    <div *ngIf="data.mode === 'show'" class="poster-mark" [ngClass]="getPosterMark(item.showId, item.showType)"></div>
+    <div class="name">{{item.name}}</div>
+    <div *ngIf="data.mode === 'show'" class="role">{{item.releaseYear}} <i class="fas fa-star"></i>{{item.rating}}</div>
+    <div *ngIf="data.mode === 'person'" class="role">{{item.character}}</div>
+  </li>
+</ul>
