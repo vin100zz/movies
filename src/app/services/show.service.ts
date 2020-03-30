@@ -8,9 +8,6 @@ import { Serie } from '../model/serie';
 import { Show } from './../model/show';
 
 
-
-
-
 const httpOptions = {
   headers: new HttpHeaders({
     'content-type': 'application/json'
@@ -28,20 +25,6 @@ export class ShowService {
   search(query: string): Observable<Object> {
     return this.httpClient.get('https://api.themoviedb.org/3/search/multi?api_key=7aac1d19d45ad4753555583cabc0832d&query=' + query);
   }
-
-  /*
-  list(): Observable<Show[]> {
-    return this.httpClient.get<Object[]>('server/list.php?ts=' + Date.now())
-      .map(dtoList => {
-        return dtoList.map(dto => {
-          if (dto['type'] === Movie.TYPE) {
-            return new Movie(dto['data'], true, dto['watched'], dto['towatch']);
-          }
-          return new Serie(dto['data'], true, dto['watched'], dto['towatch']);
-        });
-      });
-  }
-  */
 
   listShowsWithTags() {
     return this.httpClient.get<Object[]>('server/list_shows_with_tags.php?ts=' + Date.now());

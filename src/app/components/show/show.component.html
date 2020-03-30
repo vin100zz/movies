@@ -75,6 +75,14 @@
     </div>
   </div>
 
+  <div class="app-section summary">
+    <div *ngIf="show.tagline" class="title">
+      <i class="fas fa-quote-right"></i>
+      {{show.tagline}}
+    </div>
+    <div class="overview">{{show.overview}}</div>
+  </div>
+
   <div *ngIf="show.directions.length" class="app-section direction">
     <div class="title">Direction</div>
     <app-gallery [data]="directionGalleryData"></app-gallery>
@@ -83,14 +91,6 @@
   <div *ngIf="show.casts.length" class="app-section cast">
     <div class="title">Cast</div>
     <app-gallery [data]="castGalleryData"></app-gallery>
-  </div>
-
-  <div class="app-section summary">
-    <div *ngIf="show.tagline" class="title">
-      <i class="fas fa-quote-right"></i>
-      {{show.tagline}}
-    </div>
-    <div class="overview">{{show.overview}}</div>
   </div>
 
   <div *ngIf="show.similars.length" class="app-section similar">

@@ -69,20 +69,32 @@ export class Person {
     this.biography = dto['biography'];
     this.profilePath = 'http://image.tmdb.org/t/p/w500/' + dto['profile_path'];
 
+    const processed = { direction: [], cast: [] };
+
     this.directions = dto['combined_credits']['crew']
       .filter(this.mustKeepShow)
+      .filter(this.isNotDuplicate.bind(this, processed, 'direction'))
       .filter(crewDto => crewDto.job === 'Director')
       .map(crewDto => new Direction(crewDto))
       .sort((direction1, direction2) => direction2.releaseYear - direction1.releaseYear);
 
     this.casts = dto['combined_credits']['cast']
       .filter(this.mustKeepShow)
+      .filter(this.isNotDuplicate.bind(this, processed, 'cast'))
       .map(castDto => new Cast(castDto))
-      .sort((cast1, cast2) => cast2.releaseYear - cast1.releaseYear);;
+      .sort((cast1, cast2) => cast2.releaseYear - cast1.releaseYear);
   }
 
   mustKeepShow(dto): boolean {
-    return dto.genre_ids && dto.genre_ids.length && !dto.genre_ids.some(genre => [10767 /* Talk */, 99 /* Documentary */].includes(genre));
+    return dto.genre_ids && dto.genre_ids.length && !dto.genre_ids.some(genre => [10767 /* Talk */, 99 /* Documentary */, 10764 /* Reality */].includes(genre));
+  }
+
+  isNotDuplicate(processed, type, dto): boolean {
+    if (processed[type][dto.id]) {
+      return false;
+    }
+    processed[type][dto.id] = true;
+    return true;
   }
 
 }

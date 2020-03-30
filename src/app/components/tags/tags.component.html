@@ -1,4 +1,7 @@
 <div class="body">
+
+  <div (click)="createTag()">+</div>
+
   <ul *ngFor="let tag of tags" class="app-section">
     <div class="title">{{tag.label}}</div>
     <app-gallery [data]="tag.galleryData"></app-gallery>

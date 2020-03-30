@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from 'src/app/model/movie';
+import { Tag } from 'src/app/model/tag';
 import { TagService } from '../../services/tag.service';
 
 @Component({
@@ -15,24 +16,31 @@ export class TagsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tagService.listTagsWithShows().subscribe(tags => {
-      this.tags = tags.map(tag => ({
-        label: tag.label,
-        galleryData: {
-          mode: 'show',
-          display: 'scroll',
-          items: tag['shows'].map(show => ({
-            showId: show.id,
-            showType: show.type,
-            link: `/show/${show.type === Movie.TYPE ? 'M' : 'S'}/${show.id}`,
-            picture: show.posterPath,
-            name: show.title,
-            rating: show.rating,
-            releaseYear: show.releaseYear
-          }))
-        }
-      }));
-    });
+    this.tagService.listTagsWithShows().subscribe(tags => this.toGallery(tags));
+  }
+
+  toGallery(tags: Tag[]): void {
+    this.tags = tags.map(tag => ({
+      label: tag.label,
+      galleryData: {
+        mode: 'show',
+        display: 'scroll',
+        items: tag['shows'].map(show => ({
+          showId: show.id,
+          showType: show.type,
+          link: `/show/${show.type === Movie.TYPE ? 'M' : 'S'}/${show.id}`,
+          picture: show.posterPath,
+          name: show.title,
+          rating: show.rating,
+          releaseYear: show.releaseYear
+        }))
+      }
+    }));
+  }
+
+  createTag(): void {
+    var tagName = prompt("Name", "");
+    this.tagService.create(tagName).subscribe(tags => this.toGallery(tags));
   }
 
 }

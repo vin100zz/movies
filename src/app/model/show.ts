@@ -64,8 +64,8 @@ export class Show {
 
   genres: string[];
 
-  similars: RelatedShow[];
-  recommendations: RelatedShow[];
+  similars: RelatedShow[] = [];
+  recommendations: RelatedShow[] = [];
 
   // movie
   originalTitle: string;
@@ -108,13 +108,16 @@ export class Show {
       .slice(0, 15)
       .map(castdata => new Cast(castdata));
 
-
     this.tags = tags;
 
     this.genres = data['genres'].map(x => x.name);
 
-    this.similars = data['similar'].results.map(x => new RelatedShow(x));
-    this.recommendations = data['recommendations'].results.map(x => new RelatedShow(x));
+    if (data['similar'] && data['similar'].results) {
+      this.similars = data['similar'].results.map(x => new RelatedShow(x));
+    }
+    if (data['recommendations'] && data['recommendations'].results) {
+      this.recommendations = data['recommendations'].results.map(x => new RelatedShow(x));
+    }
   }
 
 }

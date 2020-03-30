@@ -11,32 +11,28 @@
   padding: 5px;
   z-index: 2;
 }
-.app-body {
+.app-header ul {
   position: absolute;
-  top: 50px;
-  bottom: 30px;
-  left: 0;
-  right: 0; 
-}
-.app-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  top: 0;
   right: 0;
-  height: 30px;
-  margin: 0;
-  background: #222;
-  color: white;
-  z-index: 2;
 }
-.app-footer li {
+.app-header li {
   display: inline-block;
-  width: 50%;
+  width: 40px;
   text-align: center;
   padding-top: 4px;
 }
-.app-footer i {
-  font-size: 110%;
+.app-header i {
+  font-size: 60%;
   color: white;
 }
+
+.app-body {
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0; 
+}
+
 

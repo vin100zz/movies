@@ -1,9 +1,7 @@
 <?php
 
-include_once "db.php";
+include_once "business.php";
 
-$result = DBAccess::query("SELECT * FROM tag");
-
-print json_encode($result, JSON_PRETTY_PRINT);
+listTags();
 
 ?>

@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { ShowService } from '../../services/show.service';
@@ -16,7 +16,13 @@ export class SearchComponent implements OnInit {
 
   results = [];
 
+  @ViewChild('searchText') private searchElement: ElementRef;
+
   constructor(private showService: ShowService) { }
+
+  public ngAfterViewInit(): void {
+    this.searchElement.nativeElement.focus();
+  }
 
   ngOnInit() {
     this.querySubject.pipe(debounceTime(500)).subscribe(query => {

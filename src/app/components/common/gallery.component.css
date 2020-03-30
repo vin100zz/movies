@@ -19,6 +19,10 @@
 .app-gallery.wrap li {
   margin-bottom: 15px;
 }
+.app-gallery li a {
+  display: block;
+  text-decoration: none;
+}
 .app-gallery li img {
   width: 100px;
   height: 150px;
