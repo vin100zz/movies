@@ -31,69 +31,80 @@ export class ShowComponent implements OnInit {
 
   youtubeLink: SafeResourceUrl;
 
-  constructor(private route: ActivatedRoute, private router: Router, private domSanitizer: DomSanitizer, private showService: ShowService, private tagService: TagService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private domSanitizer: DomSanitizer,
+    private showService: ShowService,
+    private tagService: TagService
+  ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.showService.get(params.id, params.type).subscribe(show => {
-        this.show = show;
+    this.tagService.list().subscribe(tags => this.tags = tags);
 
-        if (this.show.youtubeId) {
-          this.youtubeLink = this.domSanitizer.bypassSecurityTrustResourceUrl(this.show.youtubeId);
-        }
+    this.showService.listShowsWithTags().subscribe(shows => {
+      this.route.params.subscribe(params => {
+        this.showService.get(params.id, params.type).subscribe(show => {
+          this.show = show;
 
-        this.directionGalleryData = {
-          mode: 'person',
-          display: 'scroll',
-          items: this.show.directions.map(direction => ({
-            name: direction.personName,
-            link: `/person/${direction.personId}`,
-            picture: direction.picture
-          }))
-        };
+          if (this.show.youtubeId) {
+            this.youtubeLink = this.domSanitizer.bypassSecurityTrustResourceUrl(this.show.youtubeId);
+          }
 
-        this.castGalleryData = {
-          mode: 'person',
-          display: 'scroll',
-          items: this.show.casts.map(cast => ({
-            name: cast.personName,
-            character: cast.character,
-            link: `/person/${cast.personId}`,
-            picture: cast.picture
-          }))
-        };
+          this.directionGalleryData = {
+            mode: 'person',
+            display: 'scroll',
+            shows: shows,
+            items: this.show.directions.map(direction => ({
+              name: direction.personName,
+              link: `/person/${direction.personId}`,
+              picture: direction.picture
+            }))
+          };
 
-        this.similarGalleryData = {
-          mode: 'show',
-          display: 'scroll',
-          items: this.show.similars.map(show => ({
-            showId: show.showId,
-            showType: this.show.type,
-            link: `/show/${this.show.type === Movie.TYPE ? 'M' : 'S'}/${show.showId}`,
-            picture: show.picture,
-            name: show.title,
-            rating: show.rating,
-            releaseYear: show.releaseYear
-          }))
-        };
+          this.castGalleryData = {
+            mode: 'person',
+            display: 'scroll',
+            shows: shows,
+            items: this.show.casts.map(cast => ({
+              name: cast.personName,
+              character: cast.character,
+              link: `/person/${cast.personId}`,
+              picture: cast.picture
+            }))
+          };
 
-        this.recommendationGalleryData = {
-          mode: 'show',
-          display: 'scroll',
-          items: this.show.recommendations.map(show => ({
-            showId: show.showId,
-            showType: this.show.type,
-            link: `/show/${this.show.type === Movie.TYPE ? 'M' : 'S'}/${show.showId}`,
-            picture: show.picture,
-            name: show.title,
-            rating: show.rating,
-            releaseYear: show.releaseYear
-          }))
-        };
+          this.similarGalleryData = {
+            mode: 'show',
+            display: 'scroll',
+            shows: shows,
+            items: this.show.similars.map(show => ({
+              showId: show.showId,
+              showType: this.show.type,
+              link: `/show/${this.show.type === Movie.TYPE ? 'M' : 'S'}/${show.showId}`,
+              picture: show.picture,
+              name: show.title,
+              rating: show.rating,
+              releaseYear: show.releaseYear
+            }))
+          };
 
-
+          this.recommendationGalleryData = {
+            mode: 'show',
+            display: 'scroll',
+            shows: shows,
+            items: this.show.recommendations.map(show => ({
+              showId: show.showId,
+              showType: this.show.type,
+              link: `/show/${this.show.type === Movie.TYPE ? 'M' : 'S'}/${show.showId}`,
+              picture: show.picture,
+              name: show.title,
+              rating: show.rating,
+              releaseYear: show.releaseYear
+            }))
+          };
+        });
       });
-      this.tagService.list().subscribe(tags => this.tags = tags);
     });
   }
 

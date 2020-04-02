@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ShowService } from 'src/app/services/show.service';
 import { Person } from '../../model/person';
 import { PersonService } from '../../services/person.service';
 
@@ -17,42 +18,52 @@ export class PersonComponent implements OnInit {
 
   castGalleryData: Object;
 
-  constructor(private route: ActivatedRoute, private router: Router, private personService: PersonService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private personService: PersonService,
+    private showService: ShowService
+  ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.personService.get(params.id).subscribe(person => {
-        this.person = person;
+    this.showService.listShowsWithTags().subscribe(shows => {
+      this.route.params.subscribe(params => {
+        this.personService.get(params.id).subscribe(person => {
+          this.person = person;
 
-        this.directionGalleryData = {
-          mode: 'show',
-          display: 'scroll',
-          items: this.person.directions.map(direction => ({
-            showId: direction.showId,
-            showType: direction.showType,
-            link: `/show/${direction.isMovie ? 'M' : 'S'}/${direction.showId}`,
-            picture: direction.picture,
-            name: direction.title,
-            rating: direction.rating,
-            releaseYear: direction.releaseYear
-          }))
-        };
+          this.directionGalleryData = {
+            mode: 'show',
+            display: 'scroll',
+            shows: shows,
+            items: this.person.directions.map(direction => ({
+              showId: direction.showId,
+              showType: direction.showType,
+              link: `/show/${direction.isMovie ? 'M' : 'S'}/${direction.showId}`,
+              picture: direction.picture,
+              name: direction.title,
+              rating: direction.rating,
+              releaseYear: direction.releaseYear
+            }))
+          };
 
-        this.castGalleryData = {
-          mode: 'show',
-          display: 'scroll',
-          items: this.person.casts.map(cast => ({
-            showId: cast.showId,
-            showType: cast.showType,
-            link: `/show/${cast.isMovie ? 'M' : 'S'}/${cast.showId}`,
-            picture: cast.picture,
-            name: cast.title,
-            rating: cast.rating,
-            releaseYear: cast.releaseYear
-          }))
-        };
+          this.castGalleryData = {
+            mode: 'show',
+            display: 'scroll',
+            shows: shows,
+            items: this.person.casts.map(cast => ({
+              showId: cast.showId,
+              showType: cast.showType,
+              link: `/show/${cast.isMovie ? 'M' : 'S'}/${cast.showId}`,
+              picture: cast.picture,
+              name: cast.title,
+              rating: cast.rating,
+              releaseYear: cast.releaseYear
+            }))
+          };
+        });
       });
     });
+
   }
 
 }
