@@ -31,6 +31,7 @@ export class TagsComponent implements OnInit {
           mode: 'show',
           display: 'scroll',
           shows: shows,
+          displayWatchedOnly: true,
           items: tag['shows'].map(show => ({
             showId: show.id,
             showType: show.type,

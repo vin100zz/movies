@@ -4,6 +4,7 @@ export class GalleryData {
   mode: string; // show or person
   display: string; // scroll or wrap
   shows: any[]; // shows with tqgs
+  displayWatchedOnly: boolean;
   items: Object[];
 }
 
@@ -23,12 +24,12 @@ export class GalleryComponent implements OnInit {
   }
 
   getPosterMark(showId: string, showType: string): string {
-    const show = this.data.shows.find(x => x['id'] === showId && x['type'] === showType);
+    const show = this.data.shows.find(x => x['id'] + '' === showId + '' && x['type'] === showType);
     if (show) {
       if (show['watched'] === 'true') {
         return 'watched';
       }
-      if (show['tags'].length) {
+      if (!this.data.displayWatchedOnly && show['tags'].length) {
         return 'tagged';
       }
     }
