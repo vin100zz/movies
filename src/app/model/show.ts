@@ -24,19 +24,29 @@ class Cast {
   }
 }
 
-class RelatedShow {
-  showId: string;
-  title: string;
-  releaseYear: number;
-  rating: number;
+export class LightShow {
   picture: string;
 
-  constructor(data: Object) {
-    this.showId = data['id'] + '';
-    this.title = data['title'] || data['name'];
-    this.releaseYear = parseInt((data['release_date'] || data['first_air_date'] || '').substr(0, 4), 10);
-    this.rating = data['vote_average'];
-    this.picture = 'http://image.tmdb.org/t/p/w500/' + data['poster_path'];
+  constructor(
+    public id: string,
+    public type: string,
+    public title: string,
+    public releaseYear: number,
+    public rating: number,
+    picture: string
+  ) {
+    this.picture = 'http://image.tmdb.org/t/p/w500/' + picture;
+  }
+
+  static fromDto(dto: any): LightShow {
+    return new LightShow(
+      dto.id,
+      dto.type,
+      dto.title,
+      dto.year,
+      dto.rating,
+      dto.picture
+    );
   }
 }
 
@@ -64,8 +74,8 @@ export class Show {
 
   genres: string[];
 
-  similars: RelatedShow[] = [];
-  recommendations: RelatedShow[] = [];
+  similars: LightShow[] = [];
+  recommendations: LightShow[] = [];
 
   // movie
   originalTitle: string;
@@ -113,10 +123,10 @@ export class Show {
     this.genres = data['genres'].map(x => x.name);
 
     if (data['similar'] && data['similar'].results) {
-      this.similars = data['similar'].results.map(x => new RelatedShow(x));
+      this.similars = data['similar'].results.map(x => LightShow.fromDto(x));
     }
     if (data['recommendations'] && data['recommendations'].results) {
-      this.recommendations = data['recommendations'].results.map(x => new RelatedShow(x));
+      this.recommendations = data['recommendations'].results.map(x => LightShow.fromDto(x));
     }
   }
 
