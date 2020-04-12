@@ -1,3 +1,5 @@
+import { Tag } from './tag';
+
 class Direction {
   personId: string;
   personName: string;
@@ -40,12 +42,39 @@ export class LightShow {
 
   static fromDto(dto: any): LightShow {
     return new LightShow(
-      dto.id,
+      dto.id + '',
       dto.type,
-      dto.title,
-      dto.year,
-      dto.rating,
-      dto.picture
+      dto.title || dto.name,
+      dto.year || parseInt((dto.release_date || dto.first_air_date || '').substr(0, 4), 10),
+      dto.rating || dto.vote_average,
+      dto.picture || dto.poster_path
+    );
+  }
+}
+
+export class ShowWithTags extends LightShow {
+  constructor(
+    id: string,
+    type: string,
+    title: string,
+    releaseYear: number,
+    rating: number,
+    picture: string,
+    public watched: boolean,
+    public tags: Tag[]) {
+    super(id, type, title, releaseYear, rating, picture);
+  }
+
+  static fromDto(dto: any): ShowWithTags {
+    return new ShowWithTags(
+      dto.id + '',
+      dto.type,
+      dto.title || dto.name,
+      dto.year || parseInt((dto.release_date || dto.first_air_date || '').substr(0, 4), 10),
+      dto.rating || dto.vote_average,
+      dto.picture || dto.poster_path,
+      dto.watched + '' === 'true',
+      dto.tags.map(tagDto => Tag.fromDto(tagDto))
     );
   }
 }

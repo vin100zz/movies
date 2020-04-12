@@ -2,7 +2,7 @@
 
 include_once "business.php";
 
-$shows = DBAccess::query("SELECT * FROM show");
+$shows = DBAccess::query("SELECT * FROM show WHERE title IS NULL");
 
 for ($i=0; $i<count($shows); ++$i) {
 	$show = $shows[$i];

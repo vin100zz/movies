@@ -17,17 +17,6 @@
 .body {
   padding: 10px;
 }
-.tag {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-}
-.tag .title {
-  margin-bottom: 5px;
-  font-family: "title";
-  font-weight: bold;
-  color: brown;
-}
-.movie {
-  padding: 5px;
+.title i {
+  margin-left: 10px;
 }

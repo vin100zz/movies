@@ -79,9 +79,9 @@ export class ShowComponent implements OnInit {
             display: 'scroll',
             shows: shows,
             items: this.show.similars.map(show => ({
-              showId: show.showId,
+              showId: show.id,
               showType: this.show.type,
-              link: `/show/${this.show.type === Movie.TYPE ? 'M' : 'S'}/${show.showId}`,
+              link: `/show/${this.show.type === Movie.TYPE ? 'M' : 'S'}/${show.id}`,
               picture: show.picture,
               name: show.title,
               rating: show.rating,
@@ -94,9 +94,9 @@ export class ShowComponent implements OnInit {
             display: 'scroll',
             shows: shows,
             items: this.show.recommendations.map(show => ({
-              showId: show.showId,
+              showId: show.id,
               showType: this.show.type,
-              link: `/show/${this.show.type === Movie.TYPE ? 'M' : 'S'}/${show.showId}`,
+              link: `/show/${this.show.type === Movie.TYPE ? 'M' : 'S'}/${show.id}`,
               picture: show.picture,
               name: show.title,
               rating: show.rating,

@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ShowWithTags } from 'src/app/model/show';
 
 export class GalleryData {
   mode: string; // show or person
   display: string; // scroll or wrap
-  shows: any[]; // shows with tqgs
+  shows: ShowWithTags[]; // shows with tqgs
   displayWatchedOnly: boolean;
   items: Object[];
 }
@@ -24,12 +25,12 @@ export class GalleryComponent implements OnInit {
   }
 
   getPosterMark(showId: string, showType: string): string {
-    const show = this.data.shows.find(x => x['id'] + '' === showId + '' && x['type'] === showType);
-    if (show) {
-      if (show['watched'] === 'true') {
+    const matchingShow = this.data.shows.find(show => show.id + '' === showId + '' && show.type === showType);
+    if (matchingShow) {
+      if (matchingShow.watched) {
         return 'watched';
       }
-      if (!this.data.displayWatchedOnly && show['tags'].length) {
+      if (!this.data.displayWatchedOnly && matchingShow.tags.length) {
         return 'tagged';
       }
     }

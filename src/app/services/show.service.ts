@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Movie } from '../model/movie';
 import { Serie } from '../model/serie';
-import { Show } from './../model/show';
+import { Show, ShowWithTags } from './../model/show';
 
 
 const httpOptions = {
@@ -26,8 +26,8 @@ export class ShowService {
     return this.httpClient.get('https://api.themoviedb.org/3/search/multi?api_key=7aac1d19d45ad4753555583cabc0832d&query=' + query);
   }
 
-  listShowsWithTags() {
-    return this.httpClient.get<Object[]>('server/list_shows_with_tags.php?ts=' + Date.now());
+  listShowsWithTags(): Observable<ShowWithTags[]> {
+    return this.httpClient.get<Object[]>('server/list_shows_with_tags.php?ts=' + Date.now()).pipe(map(arr => arr.map(ShowWithTags.fromDto)));
   }
 
   save(show: Show): Observable<Show> {

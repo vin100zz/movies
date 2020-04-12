@@ -1,8 +1,11 @@
 <div class="create-tag" (click)="createTag()">+</div>
 
 <div class="body">
-  <ul *ngFor="let tag of tags" class="app-section">
-    <div class="title">{{tag.label}}</div>
-    <app-gallery [data]="tag.galleryData"></app-gallery>
+  <ul *ngFor="let item of tagItems" class="app-section">
+    <div class="title">
+      <span>{{item.tag.label}}</span>
+      <i *ngIf="item.tag.rank > 0" class="fas fa-chevron-up" (click)="promoteTag(item.tag.id)"></i>
+    </div>
+    <app-gallery [data]="item.galleryData"></app-gallery>
   </ul>
 </div>
