@@ -73,8 +73,8 @@ export class Person {
 
     this.directions = dto['combined_credits']['crew']
       .filter(this.mustKeepShow)
-      .filter(this.isNotDuplicate.bind(this, processed, 'direction'))
       .filter(crewDto => crewDto.job === 'Director')
+      .filter(this.isNotDuplicate.bind(this, processed, 'direction'))
       .map(crewDto => new Direction(crewDto))
       .sort((direction1, direction2) => direction2.releaseYear - direction1.releaseYear);
 

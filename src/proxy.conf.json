@@ -1,6 +1,6 @@
 {
   "/server": {
-    "target": "http://localhost:8080/edsa-www/movies/",
+    "target": "http://localhost/edsa-www/movies/",
     "secure": false
   }
 }

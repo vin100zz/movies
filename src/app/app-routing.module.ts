@@ -5,9 +5,6 @@ import { SearchComponent } from './components/search/search.component';
 import { ShowComponent } from "./components/show/show.component";
 import { TagsComponent } from './components/tags/tags.component';
 
-
-
-
 const routes: Routes = [
   { path: '', redirectTo: '/tags', pathMatch: 'full' },
 

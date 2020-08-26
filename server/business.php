@@ -50,7 +50,21 @@ function saveShow($id, $type, $data) {
     $data = str_replace("'", "''", $data);
 
     DBAccess::exec("INSERT INTO show(id, type, title, year, rating, picture, data) VALUES ('$id', '$type', '$title', '$year', '$rating', '$picture', '$data')");
-  }  
+  }
+}
+
+function resyncShow($id, $type, $data) {
+  $json = json_decode($data, true);
+
+  $title = str_replace("'", "''", utf8_decode(array_key_exists("original_title", $json) ? $json["original_title"] : $json["original_name"]));
+  $year = substr($type === "M" ? $json["release_date"] : $json["first_air_date"], 0, 4);
+  $rating = $json["vote_average"];
+  $picture = $json["poster_path"];
+
+  $data = utf8_decode($data);
+  $data = str_replace("'", "''", $data);
+
+  DBAccess::exec("UPDATE show SET rating='$rating', picture='$picture', data='$data' WHERE id='$id' AND type='$type'");
 }
 
 function listTags() {

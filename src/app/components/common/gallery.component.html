@@ -1,6 +1,6 @@
 <ul *ngIf="data && data.items" class="app-gallery {{data.display}}">
   <li *ngFor="let item of data.items">
-    <a routerLink="{{item.link}}">
+    <a target="_blank" routerLink="{{item.link}}">
       <img [src]="item.picture" onerror="this.src='assets/empty-show.jpg'" />
       <div *ngIf="data.mode === 'show'" class="poster-mark" [ngClass]="getPosterMark(item.showId, item.showType)"></div>
       <div class="name">{{item.name}}</div>

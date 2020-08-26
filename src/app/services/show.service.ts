@@ -41,6 +41,17 @@ export class ShowService {
     return this.httpClient.post<T>('server/save.php?ts=' + Date.now() + '&type=' + show.type + '&id=' + show.id, show.data, httpOptions).pipe(map(mapDtoFn));
   }
 
+  resync(show: Show): Observable<Show> {
+    if (show.type === Movie.TYPE) {
+      return this.resyncAs<Movie>(show, this.mapMovieDto);
+    }
+    return this.resyncAs<Serie>(show, this.mapSerieDto);
+  }
+
+  resyncAs<T>(show: Show, mapDtoFn: (dto: Object) => T): Observable<T> {
+    return this.httpClient.post<T>('server/resync.php?ts=' + Date.now() + '&type=' + show.type + '&id=' + show.id, show.data, httpOptions);
+  }
+
   update<T>(id: string, type: string, watched: boolean, toWatch: boolean, mapDtoFn: (dto: Object) => T): Observable<T> {
     return this.httpClient.get<T>('server/update.php?ts=' + Date.now() + '&type=' + type + '&id=' + id + '&watched=' + watched + '&toWatch=' + toWatch).pipe(map(mapDtoFn));
   }
@@ -60,12 +71,25 @@ export class ShowService {
           observer.complete();
           return;
         }
-        this.httpClient.get('https://api.themoviedb.org/3/' + tmdbKey + '/' + id + '?api_key=7aac1d19d45ad4753555583cabc0832d&append_to_response=credits,images,videos,recommendations,keywords,similar').pipe(
-          map(data => {
-            observer.next(mapDataFn(data));
-            observer.complete();
-          })).subscribe();
+        this.getFromTmdbAs(id, type, tmdbKey, mapDtoFn, mapDataFn).subscribe();
       });
+    });
+  }
+
+  getFromTmdb(id: String, type: string): Observable<Show> {
+    if (type === Movie.TYPE) {
+      return this.getFromTmdbAs<Movie>(id, type, Movie.TMDB_KEY, this.mapMovieDto, this.mapMovieData);
+    }
+    return this.getFromTmdbAs<Serie>(id, type, Serie.TMDB_KEY, this.mapSerieDto, this.mapSerieData);
+  }
+
+  getFromTmdbAs<T>(id: String, type: string, tmdbKey: string, mapDtoFn: (dto: Object) => T, mapDataFn: (dto: Object) => T): Observable<T> {
+    return new Observable<T>(observer => {
+      this.httpClient.get('https://api.themoviedb.org/3/' + tmdbKey + '/' + id + '?api_key=7aac1d19d45ad4753555583cabc0832d&append_to_response=credits,images,videos,recommendations,keywords,similar').pipe(
+        map(data => {
+          observer.next(mapDataFn(data));
+          observer.complete();
+        })).subscribe();
     });
   }
 
