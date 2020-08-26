@@ -71,7 +71,7 @@ export class ShowService {
           observer.complete();
           return;
         }
-        this.getFromTmdbAs(id, type, tmdbKey, mapDtoFn, mapDataFn).subscribe();
+        this.getFromTmdbAs(id, type, tmdbKey, mapDtoFn, mapDataFn).subscribe(movie => {observer.next(movie); observer.complete();});        
       });
     });
   }
@@ -84,13 +84,7 @@ export class ShowService {
   }
 
   getFromTmdbAs<T>(id: String, type: string, tmdbKey: string, mapDtoFn: (dto: Object) => T, mapDataFn: (dto: Object) => T): Observable<T> {
-    return new Observable<T>(observer => {
-      this.httpClient.get('https://api.themoviedb.org/3/' + tmdbKey + '/' + id + '?api_key=7aac1d19d45ad4753555583cabc0832d&append_to_response=credits,images,videos,recommendations,keywords,similar').pipe(
-        map(data => {
-          observer.next(mapDataFn(data));
-          observer.complete();
-        })).subscribe();
-    });
+    return this.httpClient.get('https://api.themoviedb.org/3/' + tmdbKey + '/' + id + '?api_key=7aac1d19d45ad4753555583cabc0832d&append_to_response=credits,images,videos,recommendations,keywords,similar').pipe(map(mapDataFn));
   }
 
   delete(id: string, type: string): void {
