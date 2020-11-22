@@ -11,9 +11,12 @@
   padding: 5px;
   z-index: 2;
 }
+.app-header .title {
+  padding-top: 12px;
+}
 .app-header ul {
   position: absolute;
-  top: 0;
+  top: 12px;
   right: 5px;
 }
 .app-header li {

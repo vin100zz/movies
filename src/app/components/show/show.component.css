@@ -51,7 +51,7 @@
   position: absolute;
 }
 .header .youtube {
-  bottom: 0;
+  bottom: 27px;
   left: 235px;
   color: red;
   font-size: 44pt;
@@ -124,12 +124,12 @@
   height: 0;
   border-color: transparent brown transparent transparent;
   border-style: solid;
-  border-width: 9px 12px 12px 0;
+  border-width: 12px 12px 12px 0;
  }
  .tags .tag:after {
   content: '';
   position: absolute;
-  top: 9px;
+  top: 11px;
   left: 0;
   width: 4px;
   height: 4px;

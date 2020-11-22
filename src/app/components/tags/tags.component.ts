@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+
 import { Movie } from 'src/app/model/movie';
 import { ShowWithTags } from 'src/app/model/show';
 import { TagWithShows } from 'src/app/model/tag';
@@ -70,14 +72,6 @@ export class TagsComponent implements OnInit {
     this.tagService.rename(tagId, tagName).subscribe(tags => this.toGallery(tags));
   }
 
-  promoteTag(tagId: string): void {
-    this.tagService.promote(tagId).subscribe(tags => this.toGallery(tags));
-  }
-
-  demoteTag(tagId: string): void {
-    this.tagService.demote(tagId).subscribe(tags => this.toGallery(tags));
-  }
-
   sortFunctions: Function[] = [
     (item1, item2) => item1['rating'] > item2['rating'] ? -1 : 1,
     (item1, item2) => item1['releaseYear'] > item2['releaseYear'] ? -1 : 1
@@ -106,6 +100,24 @@ export class TagsComponent implements OnInit {
       tagItem.galleryData.hideWatchedShows = this.hideWatchedShows;
       return tagItem;
     });    
+  }
+
+  isShowReorderPopup: boolean = false;
+
+  showReorderPopup(): void {
+    this.isShowReorderPopup = true;
+  }
+
+  closeReorderPopup(): void {
+    this.isShowReorderPopup = false;
+    let orderedTagIds = this.tagItems.map(item => item.tag.id);
+    this.tagService.reorder(orderedTagIds).subscribe(tags => {
+      this.toGallery(tags);
+    });
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.tagItems, event.previousIndex, event.currentIndex);
   }
 
 }

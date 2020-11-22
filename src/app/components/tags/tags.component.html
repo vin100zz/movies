@@ -1,23 +1,38 @@
-<div class="action-button create-tag" (click)="createTag()">
-  <i class="fas fa-plus"></i>
-</div>
-
-<div class="action-button sort-shows" (click)="sortShows()">
-  <i class="fas fa-random"></i>
-</div>
-
-<div class="action-button toggle-watched" (click)="toggleWatched()">
-  <i class="fas fa-check"></i>
-</div>
 
 <div class="body">
   <ul *ngFor="let item of tagItems; first as isFirst; last as isLast" class="app-section">
     <div class="title">
       <span>{{item.tag.label}}</span>
       <i class="fas fa-pen" (click)="renameTag(item.tag.id, item.tag.label)"></i>
-      <i *ngIf="!isFirst" class="fas fa-chevron-up" (click)="promoteTag(item.tag.id)"></i>
-      <i *ngIf="!isLast" class="fas fa-chevron-down" (click)="demoteTag(item.tag.id)"></i>
     </div>
     <app-gallery [data]="item.galleryData"></app-gallery>
   </ul>
+</div>
+
+<div class="action-button create-tag" (click)="createTag()">
+  <i class="fas fa-plus"></i>
+</div>
+
+<div class="action-button sort-shows" (click)="sortShows()">
+  <i class="fas fa-sort"></i>
+</div>
+
+<div class="action-button toggle-watched" (click)="toggleWatched()">
+  <i class="fas fa-check"></i>
+</div>
+
+<div class="action-button show-reorder" (click)="showReorderPopup()">
+  <i class="fas fa-sort"></i>
+</div>
+
+<div *ngIf="isShowReorderPopup" class="reorder">
+  <div class="reorder-container">
+    <i class="fas fa-times close-reorder" (click)="closeReorderPopup()"></i>
+    <div cdkDropList class="reorder-list" (cdkDropListDropped)="drop($event)">
+      <div class="reorder-box" *ngFor="let item of tagItems" cdkDrag>
+        <div class="reorder-custom-placeholder" *cdkDragPlaceholder></div>
+        {{item.tag.label}}
+      </div>
+    </div>
+  </div>
 </div>

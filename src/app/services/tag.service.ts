@@ -44,12 +44,8 @@ export class TagService {
     return this.httpClient.get<Object[]>('server/rename_tag.php?ts=' + Date.now() + '&id=' + id + '&name=' + name).pipe(map(arr => arr.map(TagWithShows.fromDto)));
   }
 
-  promote(tagId: string): Observable<TagWithShows[]> {
-    return this.httpClient.get<Object[]>('server/promote_tag.php?ts=' + Date.now() + '&tagId=' + tagId).pipe(map(arr => arr.map(TagWithShows.fromDto)));
-  }
-
-  demote(tagId: string): Observable<TagWithShows[]> {
-    return this.httpClient.get<Object[]>('server/demote_tag.php?ts=' + Date.now() + '&tagId=' + tagId).pipe(map(arr => arr.map(TagWithShows.fromDto)));
+  reorder(orderedTagIds: string[]): Observable<TagWithShows[]> {
+    return this.httpClient.post<Object[]>('server/reorder_tags.php?ts=' + Date.now() + '&name=' + name, orderedTagIds, httpOptions).pipe(map(arr => arr.map(TagWithShows.fromDto)));
   }
 
 } 
