@@ -37,15 +37,24 @@ export class TagsComponent implements OnInit {
           mode: 'show',
           display: 'scroll',
           shows: this.shows,
-          displayWatchedOnly: true,
-          items: tag['shows'].map(show => ({
+          hideWatchedShows: this.hideWatchedShows,
+          displayWatchedIconOnly: true,
+          items: tag['shows']
+          .sort((item1, item2) => {
+            if (item1['watched'] != item2['watched']) {
+              return item1['watched'] ? 1 : -1;
+            }
+            return 0;
+          })
+          .map(show => ({
             showId: show.id,
             showType: show.type,
             link: `/show/${show.type === Movie.TYPE ? 'M' : 'S'}/${show.id}`,
             picture: show.picture,
             name: show.title,
             rating: show.rating,
-            releaseYear: show.releaseYear
+            releaseYear: show.releaseYear,
+            watched: show.watched
           }))
         }
       }));
@@ -56,8 +65,47 @@ export class TagsComponent implements OnInit {
     this.tagService.create(tagName).subscribe(tags => this.toGallery(tags));
   }
 
+  renameTag(tagId: string, tagLabel: string): void {
+    var tagName = prompt("Name", tagLabel);
+    this.tagService.rename(tagId, tagName).subscribe(tags => this.toGallery(tags));
+  }
+
   promoteTag(tagId: string): void {
     this.tagService.promote(tagId).subscribe(tags => this.toGallery(tags));
+  }
+
+  demoteTag(tagId: string): void {
+    this.tagService.demote(tagId).subscribe(tags => this.toGallery(tags));
+  }
+
+  sortFunctions: Function[] = [
+    (item1, item2) => item1['rating'] > item2['rating'] ? -1 : 1,
+    (item1, item2) => item1['releaseYear'] > item2['releaseYear'] ? -1 : 1
+  ];
+
+  sortIndex: number = 0;
+
+  sortShows(): void {
+    this.tagItems = this.tagItems.map(tagItem => {
+      tagItem.galleryData.items.sort((item1, item2) => {
+        if (item1['watched'] != item2['watched']) {
+          return item1['watched'] ? 1 : -1;
+        }
+        return this.sortFunctions[this.sortIndex](item1, item2);
+      });
+      return tagItem; 
+    })
+    this.sortIndex = (this.sortIndex+1)%this.sortFunctions.length;
+  }
+
+  hideWatchedShows: boolean = true;
+
+  toggleWatched(): void {
+    this.hideWatchedShows = !this.hideWatchedShows;
+    this.tagItems = this.tagItems.map(tagItem => {
+      tagItem.galleryData.hideWatchedShows = this.hideWatchedShows;
+      return tagItem;
+    });    
   }
 
 }

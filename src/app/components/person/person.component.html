@@ -7,7 +7,7 @@
       <div class="details">
         <div *ngIf="person.birthYear">
           <i class="far fa-calendar-alt fa-left"></i>
-          <span>{{person.birthYear}}</span>
+          <span *ngIf="person.birthYear">{{person.birthYear}}</span>
           <span *ngIf="person.deathYear"> - {{person.deathYear}}</span>
         </div>
         <div *ngIf="person.birthPlace">

@@ -31,6 +31,8 @@ export class ShowComponent implements OnInit {
 
   youtubeLink: SafeResourceUrl;
 
+  googleLink: SafeResourceUrl;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -40,7 +42,9 @@ export class ShowComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tagService.list().subscribe(tags => this.tags = tags);
+    this.tagService.list().subscribe(tags => {
+      this.tags = tags.sort((tag1, tag2) => tag1.label.localeCompare(tag2.label));
+    });
 
     this.showService.listShowsWithTags().subscribe(shows => {
       this.route.params.subscribe(params => {
@@ -50,6 +54,8 @@ export class ShowComponent implements OnInit {
           if (this.show.youtubeId) {
             this.youtubeLink = this.domSanitizer.bypassSecurityTrustResourceUrl(this.show.youtubeId);
           }
+
+          this.googleLink = 'https://www.google.com/search?q=' + this.show.title;
 
           this.directionGalleryData = {
             mode: 'person',

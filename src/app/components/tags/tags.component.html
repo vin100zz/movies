@@ -1,12 +1,22 @@
-<div class="create-tag" (click)="createTag()">
+<div class="action-button create-tag" (click)="createTag()">
   <i class="fas fa-plus"></i>
 </div>
 
+<div class="action-button sort-shows" (click)="sortShows()">
+  <i class="fas fa-random"></i>
+</div>
+
+<div class="action-button toggle-watched" (click)="toggleWatched()">
+  <i class="fas fa-check"></i>
+</div>
+
 <div class="body">
-  <ul *ngFor="let item of tagItems" class="app-section">
+  <ul *ngFor="let item of tagItems; first as isFirst; last as isLast" class="app-section">
     <div class="title">
       <span>{{item.tag.label}}</span>
-      <i *ngIf="item.tag.rank > 0" class="fas fa-chevron-up" (click)="promoteTag(item.tag.id)"></i>
+      <i class="fas fa-pen" (click)="renameTag(item.tag.id, item.tag.label)"></i>
+      <i *ngIf="!isFirst" class="fas fa-chevron-up" (click)="promoteTag(item.tag.id)"></i>
+      <i *ngIf="!isLast" class="fas fa-chevron-down" (click)="demoteTag(item.tag.id)"></i>
     </div>
     <app-gallery [data]="item.galleryData"></app-gallery>
   </ul>

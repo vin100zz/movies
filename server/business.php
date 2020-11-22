@@ -31,7 +31,7 @@ function getShow($id, $type) {
 	print json_encode($show, JSON_PRETTY_PRINT);
 }
 
-function saveShow($id, $type, $data) {
+function saveShow($id, $type, $title, $data) {
   $show = DBAccess::singleRow("
     SELECT *
     FROM show
@@ -41,7 +41,7 @@ function saveShow($id, $type, $data) {
   if (!$show) {
     $json = json_decode($data, true);
 
-    $title = str_replace("'", "''", utf8_decode(array_key_exists("original_title", $json) ? $json["original_title"] : $json["original_name"]));
+    $title = str_replace("'", "''", utf8_decode($title));
     $year = substr($type === "M" ? $json["release_date"] : $json["first_air_date"], 0, 4);
     $rating = $json["vote_average"];
     $picture = $json["poster_path"];
@@ -53,10 +53,10 @@ function saveShow($id, $type, $data) {
   }
 }
 
-function resyncShow($id, $type, $data) {
+function resyncShow($id, $type, $title, $data) {
   $json = json_decode($data, true);
 
-  $title = str_replace("'", "''", utf8_decode(array_key_exists("original_title", $json) ? $json["original_title"] : $json["original_name"]));
+  $title = str_replace("'", "''", utf8_decode($title));
   $year = substr($type === "M" ? $json["release_date"] : $json["first_air_date"], 0, 4);
   $rating = $json["vote_average"];
   $picture = $json["poster_path"];

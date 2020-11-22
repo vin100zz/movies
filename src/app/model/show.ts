@@ -35,6 +35,7 @@ export class LightShow {
     public title: string,
     public releaseYear: number,
     public rating: number,
+    public watched: boolean,
     picture: string
   ) {
     this.picture = 'http://image.tmdb.org/t/p/w500/' + picture;
@@ -47,6 +48,7 @@ export class LightShow {
       dto.title || dto.name,
       dto.year || parseInt((dto.release_date || dto.first_air_date || '').substr(0, 4), 10),
       dto.rating || dto.vote_average,
+      dto.watched + '' === 'true',
       dto.picture || dto.poster_path
     );
   }
@@ -59,10 +61,10 @@ export class ShowWithTags extends LightShow {
     title: string,
     releaseYear: number,
     rating: number,
+    watched: boolean,
     picture: string,
-    public watched: boolean,
     public tags: Tag[]) {
-    super(id, type, title, releaseYear, rating, picture);
+    super(id, type, title, releaseYear, rating, watched, picture);
   }
 
   static fromDto(dto: any): ShowWithTags {
@@ -72,8 +74,8 @@ export class ShowWithTags extends LightShow {
       dto.title || dto.name,
       dto.year || parseInt((dto.release_date || dto.first_air_date || '').substr(0, 4), 10),
       dto.rating || dto.vote_average,
-      dto.picture || dto.poster_path,
       dto.watched + '' === 'true',
+      dto.picture || dto.poster_path,
       dto.tags.map(tagDto => Tag.fromDto(tagDto))
     );
   }
@@ -84,7 +86,10 @@ export class Show {
   type: string;
 
   id: string;
+ 
   title: string;
+  translatedTitle: string;
+
   overview: string;
   rating: number;
 
@@ -107,7 +112,6 @@ export class Show {
   recommendations: LightShow[] = [];
 
   // movie
-  originalTitle: string;
   releaseYear: number;
   tagline: string;
   duration: number;
@@ -125,7 +129,15 @@ export class Show {
     this.watched = watched;
 
     this.id = data['id'];
-    this.title = data['original_title'] || data['original_name'];
+
+    let originalLanguage = data['original_language'];
+
+    let originalTitle = data['original_title'] || data['original_name'];
+    let title = data['title'] || data['name'];
+
+    this.title = originalLanguage == 'fr' ? originalTitle : title;
+    this.translatedTitle = originalTitle != title ? (originalLanguage == 'fr' ? title : originalTitle) : null;
+
     this.overview = data['overview'];
     this.rating = data['vote_average'];
 

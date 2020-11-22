@@ -34,6 +34,9 @@
   margin-top: -5px;
   margin-bottom: 5px;
 }
+.header .translated-title {
+  font-style: italic;
+}
 .header .details {
   color: #aaa;
 }
@@ -43,10 +46,13 @@
 .header .nb-episodes {
   margin-left: 18px;
 }
-.header .youtube {
+.header .youtube,
+.header .google {
   position: absolute;
+}
+.header .youtube {
   bottom: 0;
-  left: 200px;
+  left: 235px;
   color: red;
   font-size: 44pt;
 }
@@ -61,11 +67,18 @@
 }
 .header .watched {
   position: absolute;
-  bottom: 20px;
+  bottom: 17px;
   right: 15px;
   cursor: pointer;
 }
-
+.header .google {
+  bottom: 25px;
+  left: 195px;
+}
+.header .google img {
+  width: 30px;
+  height: 30px;
+}
 
 /* Genres */
 .genres {

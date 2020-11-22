@@ -62,7 +62,7 @@ export class Person {
     this.id = dto['id'] + '';
     this.name = dto['name'];
 
-    this.birthYear = parseInt(dto['birthday'].substr(0, 4), 10);
+    this.birthYear = dto['birthday'] ? parseInt(dto['birthday'].substr(0, 4), 10) : null;
     this.deathYear = dto['deathday'] ? parseInt(dto['deathday'].substr(0, 4), 10) : null;
     this.birthPlace = dto['place_of_birth'];
 

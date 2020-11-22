@@ -4,8 +4,9 @@ import { ShowWithTags } from 'src/app/model/show';
 export class GalleryData {
   mode: string; // show or person
   display: string; // scroll or wrap
-  shows: ShowWithTags[]; // shows with tqgs
-  displayWatchedOnly: boolean;
+  shows: ShowWithTags[]; // shows with tags
+  hideWatchedShows: boolean = false;
+  displayWatchedIconOnly: boolean = false;
   items: Object[];
 }
 
@@ -30,7 +31,7 @@ export class GalleryComponent implements OnInit {
       if (matchingShow.watched) {
         return 'watched';
       }
-      if (!this.data.displayWatchedOnly && matchingShow.tags.length) {
+      if (!this.data.displayWatchedIconOnly && matchingShow.tags.length) {
         return 'tagged';
       }
     }

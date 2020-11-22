@@ -38,7 +38,7 @@ export class ShowService {
   }
 
   saveAs<T>(show: Show, mapDtoFn: (dto: Object) => T): Observable<T> {
-    return this.httpClient.post<T>('server/save.php?ts=' + Date.now() + '&type=' + show.type + '&id=' + show.id, show.data, httpOptions).pipe(map(mapDtoFn));
+    return this.httpClient.post<T>('server/save.php?ts=' + Date.now() + '&type=' + show.type + '&id=' + show.id + '&title=' + show.title, show.data, httpOptions).pipe(map(mapDtoFn));
   }
 
   resync(show: Show): Observable<Show> {
@@ -49,7 +49,7 @@ export class ShowService {
   }
 
   resyncAs<T>(show: Show, mapDtoFn: (dto: Object) => T): Observable<T> {
-    return this.httpClient.post<T>('server/resync.php?ts=' + Date.now() + '&type=' + show.type + '&id=' + show.id, show.data, httpOptions);
+    return this.httpClient.post<T>('server/resync.php?ts=' + Date.now() + '&type=' + show.type + '&id=' + show.id + '&title=' + show.title, show.data, httpOptions);
   }
 
   update<T>(id: string, type: string, watched: boolean, toWatch: boolean, mapDtoFn: (dto: Object) => T): Observable<T> {
