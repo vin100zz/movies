@@ -75,3 +75,32 @@
 .app-gallery .poster-mark.tagged:before {
   content: "\f02b";
 }
+
+.app-gallery .show-type {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-top : 20px solid;
+  border-right : 20px solid transparent;
+}
+.app-gallery .show-type-M {
+  border-top-color: brown;
+}
+.app-gallery .show-type-S {
+  border-top-color: darkorchid;
+}
+.app-gallery .show-type:before {
+  position: absolute;
+  left: 2px;
+  top: -24px;
+  color: white;
+  font-size: 65%;
+}
+.app-gallery .show-type-M:before {
+  content: 'M';
+}
+.app-gallery .show-type-S:before {
+  content: 'S';
+}
