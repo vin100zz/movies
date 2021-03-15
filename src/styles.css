@@ -91,3 +91,33 @@ i {
 .button.home {
   background-color: #222;
 }
+
+/* Show type corner */
+.show-type-corner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-top : 20px solid;
+  border-right : 20px solid transparent;
+}
+.show-type-corner-M {
+  border-top-color: brown;
+}
+.show-type-corner-S {
+  border-top-color: darkorchid;
+}
+.show-type-corner:before {
+  position: absolute;
+  left: 2px;
+  top: -24px;
+  color: white;
+  font-size: 65%;
+}
+.show-type-corner-M:before {
+  content: 'M';
+}
+.show-type-corner-S:before {
+  content: 'S';
+}

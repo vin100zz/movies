@@ -56,6 +56,7 @@ export class TagsComponent implements OnInit {
             name: show.title,
             rating: show.rating,
             releaseYear: show.releaseYear,
+            duration: show.duration,
             watched: show.watched
           }))
         }

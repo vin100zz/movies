@@ -4,9 +4,12 @@
       <a target="_blank" routerLink="{{item.link}}">
         <img [src]="item.picture" onerror="this.src='assets/empty-show.jpg'" />
         <div *ngIf="data.mode === 'show'" class="poster-mark" [ngClass]="getPosterMark(item.showId, item.showType)"></div>
-        <div *ngIf="data.mode === 'show'" class="show-type show-type-{{item.showType}}"></div>
+        <div *ngIf="data.mode === 'show'" class="show-type-corner show-type-corner-{{item.showType}}"></div>
         <div class="name">{{item.name}}</div>
-        <div *ngIf="data.mode === 'show'" class="role">{{item.releaseYear}} <i class="fas fa-star"></i>{{item.rating}}
+        <div *ngIf="data.mode === 'show'" class="role">
+            <span>{{item.releaseYear}}</span>
+            <span>{{item.rating}}<i class="fas fa-star"></i></span>
+            <span *ngIf="item.duration">{{item.duration}}'</span>
         </div>
         <div *ngIf="data.mode === 'person'" class="role">{{item.character}}</div>
       </a>

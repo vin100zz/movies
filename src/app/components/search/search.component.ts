@@ -34,7 +34,7 @@ export class SearchComponent implements OnInit {
         this.results = searchResultsDto['results'].slice(0, 12).map(dto => {
           if (dto.media_type === 'person') {
             return {
-              type: dto.media_type,
+              type: 'P',
               name: dto.name,
               picture: dto.profile_path,
               link: '/person/' + dto.id,
@@ -42,7 +42,7 @@ export class SearchComponent implements OnInit {
             };
           } else if (dto.media_type === 'movie') {
             return {
-              type: dto.media_type,
+              type: 'M',
               name: dto.title,
               releaseYear: (dto.release_date || '').substr(0, 4),
               rating: dto.vote_average,
@@ -52,7 +52,7 @@ export class SearchComponent implements OnInit {
             };
           } else if (dto.media_type === 'tv') {
             return {
-              type: dto.media_type,
+              type: 'S',
               name: dto.name,
               releaseYear: (dto.first_air_date || '').substr(0, 4),
               rating: dto.vote_average,

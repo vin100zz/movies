@@ -44,12 +44,15 @@ function saveShow($id, $type, $title, $data) {
     $title = str_replace("'", "''", utf8_decode($title));
     $year = substr($type === "M" ? $json["release_date"] : $json["first_air_date"], 0, 4);
     $rating = $json["vote_average"];
+    $duration = isset($json["runtime"]) ? $json["runtime"] : '';
     $picture = $json["poster_path"];
 
     $data = utf8_decode($data);
     $data = str_replace("'", "''", $data);
 
-    DBAccess::exec("INSERT INTO show(id, type, title, year, rating, picture, data) VALUES ('$id', '$type', '$title', '$year', '$rating', '$picture', '$data')");
+    $sqlDuration = $duration ? ("'$duration'") : "NULL";
+
+    DBAccess::exec("INSERT INTO show(id, type, title, year, rating, duration, picture, data) VALUES ('$id', '$type', '$title', '$year', '$rating', $sqlDuration, '$picture', '$data')");
   }
 }
 
@@ -59,12 +62,15 @@ function resyncShow($id, $type, $title, $data) {
   $title = str_replace("'", "''", utf8_decode($title));
   $year = substr($type === "M" ? $json["release_date"] : $json["first_air_date"], 0, 4);
   $rating = $json["vote_average"];
+  $duration = isset($json["runtime"]) ? $json["runtime"] : '';
   $picture = $json["poster_path"];
 
   $data = utf8_decode($data);
   $data = str_replace("'", "''", $data);
 
-  DBAccess::exec("UPDATE show SET rating='$rating', picture='$picture', data='$data' WHERE id='$id' AND type='$type'");
+  $sqlDuration = $duration ? ("'$duration'") : "NULL";
+
+  DBAccess::exec("UPDATE show SET rating='$rating', picture='$picture', duration=$sqlDduration, data='$data' WHERE id='$id' AND type='$type'");
 }
 
 function listTags() {
@@ -78,7 +84,7 @@ function listTagsWithShows() {
   for ($i=0; $i<count($result); ++$i) {
     $tagId = $result[$i]['id'];
     $result[$i]["shows"] = DBAccess::query("
-      SELECT id, type, title, year, rating, picture, watched
+      SELECT id, type, title, year, rating, duration, picture, watched
       FROM show, tag_per_show
       WHERE show.id=tag_per_show.show_id AND show.type=tag_per_show.show_type AND tag_per_show.tag_id='$tagId'
     ");

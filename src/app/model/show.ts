@@ -35,6 +35,7 @@ export class LightShow {
     public title: string,
     public releaseYear: number,
     public rating: number,
+    public duration: number,
     public watched: boolean,
     picture: string
   ) {
@@ -48,6 +49,7 @@ export class LightShow {
       dto.title || dto.name,
       dto.year || parseInt((dto.release_date || dto.first_air_date || '').substr(0, 4), 10),
       dto.rating || dto.vote_average,
+      dto.duration,
       dto.watched + '' === 'true',
       dto.picture || dto.poster_path
     );
@@ -61,10 +63,11 @@ export class ShowWithTags extends LightShow {
     title: string,
     releaseYear: number,
     rating: number,
+    duration: number,
     watched: boolean,
     picture: string,
     public tags: Tag[]) {
-    super(id, type, title, releaseYear, rating, watched, picture);
+    super(id, type, title, releaseYear, rating, duration, watched, picture);
   }
 
   static fromDto(dto: any): ShowWithTags {
@@ -74,6 +77,7 @@ export class ShowWithTags extends LightShow {
       dto.title || dto.name,
       dto.year || parseInt((dto.release_date || dto.first_air_date || '').substr(0, 4), 10),
       dto.rating || dto.vote_average,
+      dto.duration,
       dto.watched + '' === 'true',
       dto.picture || dto.poster_path,
       dto.tags.map(tagDto => Tag.fromDto(tagDto))

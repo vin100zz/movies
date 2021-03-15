@@ -91,7 +91,8 @@ export class ShowComponent implements OnInit {
               picture: show.picture,
               name: show.title,
               rating: show.rating,
-              releaseYear: show.releaseYear
+              releaseYear: show.releaseYear,
+              duration: show.duration
             }))
           };
 
@@ -106,7 +107,8 @@ export class ShowComponent implements OnInit {
               picture: show.picture,
               name: show.title,
               rating: show.rating,
-              releaseYear: show.releaseYear
+              releaseYear: show.releaseYear,
+              duration: show.duration
             }))
           };
         });
