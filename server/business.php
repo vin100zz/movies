@@ -84,7 +84,7 @@ function listTagsWithShows() {
   for ($i=0; $i<count($result); ++$i) {
     $tagId = $result[$i]['id'];
     $result[$i]["shows"] = DBAccess::query("
-      SELECT id, type, title, year, rating, duration, picture, watched
+      SELECT id, type, title, year, rating, telerama_rating, duration, picture, watched
       FROM show, tag_per_show
       WHERE show.id=tag_per_show.show_id AND show.type=tag_per_show.show_type AND tag_per_show.tag_id='$tagId'
     ");

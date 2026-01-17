@@ -35,6 +35,7 @@ export class LightShow {
     public title: string,
     public releaseYear: number,
     public rating: number,
+    public teleramaRating: number,
     public duration: number,
     public watched: boolean,
     picture: string
@@ -49,6 +50,7 @@ export class LightShow {
       dto.title || dto.name,
       dto.year || parseInt((dto.release_date || dto.first_air_date || '').substr(0, 4), 10),
       dto.rating || dto.vote_average,
+      dto.telerama_rating,
       dto.duration,
       dto.watched + '' === 'true',
       dto.picture || dto.poster_path
@@ -63,11 +65,12 @@ export class ShowWithTags extends LightShow {
     title: string,
     releaseYear: number,
     rating: number,
+    teleramaRating: number,
     duration: number,
     watched: boolean,
     picture: string,
     public tags: Tag[]) {
-    super(id, type, title, releaseYear, rating, duration, watched, picture);
+    super(id, type, title, releaseYear, rating, teleramaRating, duration, watched, picture);
   }
 
   static fromDto(dto: any): ShowWithTags {
@@ -77,6 +80,7 @@ export class ShowWithTags extends LightShow {
       dto.title || dto.name,
       dto.year || parseInt((dto.release_date || dto.first_air_date || '').substr(0, 4), 10),
       dto.rating || dto.vote_average,
+      dto.telerama_rating,
       dto.duration,
       dto.watched + '' === 'true',
       dto.picture || dto.poster_path,
@@ -95,7 +99,9 @@ export class Show {
   translatedTitle: string;
 
   overview: string;
+
   rating: number;
+  teleramaRating: number;
 
   backgroundPath: string;
   posterPath: string;
@@ -109,8 +115,6 @@ export class Show {
   tags: string[];
 
   watched: boolean;
-
-  teleramaRating: number;
 
   genres: string[];
 
@@ -133,7 +137,6 @@ export class Show {
     this.type = type;
 
     this.watched = watched;
-    this.teleramaRating = teleramaRating;
 
     this.id = data['id'];
 
@@ -146,7 +149,9 @@ export class Show {
     this.translatedTitle = originalTitle != title ? (originalLanguage == 'fr' ? title : originalTitle) : null;
 
     this.overview = data['overview'];
-    this.rating = data['vote_average'] ? Number(data['vote_average']).toFixed(1) : null;
+
+    this.rating = Math.round(data['vote_average'] * 10) / 10;
+    this.teleramaRating = teleramaRating;
 
     this.backgroundPath = data['backdrop_path'];
     this.posterPath = 'http://image.tmdb.org/t/p/w500/' + data['poster_path'];

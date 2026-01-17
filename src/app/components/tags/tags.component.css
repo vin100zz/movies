@@ -21,10 +21,13 @@
   background: royalblue;
 }
 .create-tag {
-  right: 255px;
+  right: 315px;
   background: brown;
 }
 .sort-tags-by-rating {
+  right: 255px;
+}
+.sort-tags-by-telerama-rating {
   right: 195px;
 }
 .sort-tags-by-duration {

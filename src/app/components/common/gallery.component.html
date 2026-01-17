@@ -7,8 +7,9 @@
         <div *ngIf="data.mode === 'show'" class="show-type-corner show-type-corner-{{item.showType}}"></div>
         <div class="name">{{item.name}}</div>
         <div *ngIf="data.mode === 'show'" class="role">
-            <span>{{item.releaseYear}}</span>
-            <span>{{item.rating}}<i class="fas fa-star"></i></span>
+            <span *ngIf="item.releaseYear">{{item.releaseYear}}</span>
+            <span><i class="fas fa-star"></i>{{item.rating}}</span>
+            <span *ngIf="item.teleramaRating" class="telerama-rating">{{item.teleramaRating-1}}</span>
             <span *ngIf="item.duration">{{item.duration}}'</span>
         </div>
         <div *ngIf="data.mode === 'person'" class="role">{{item.character}}</div>

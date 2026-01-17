@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ShowWithTags } from 'src/app/model/show';
+import { LightShow, ShowWithTags } from 'src/app/model/show';
 
 export class GalleryData {
   mode: string; // show or person

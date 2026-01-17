@@ -47,8 +47,16 @@
 }
 .app-gallery li .role > span {
   display: inline-block;
-  margin: 0 5px;
+  margin: 0 2px;
 }
+.app-gallery li .telerama-rating:after {
+  content: 'T';
+  color: white;
+  background: #666;
+  padding: 0 1px;
+  margin-left: 2px
+}
+
 .app-gallery .poster-mark {
   position: absolute;
   width: 30px;

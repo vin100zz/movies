@@ -60,6 +60,7 @@ export class TagsComponent implements OnInit {
             picture: show.picture,
             name: show.title,
             rating: show.rating ? Number(show.rating).toFixed(1) : null,
+            teleramaRating: show.teleramaRating,
             releaseYear: show.releaseYear,
             duration: show.duration,
             watched: show.watched
@@ -93,31 +94,33 @@ export class TagsComponent implements OnInit {
   }
 
   sortShowsByRating(): void {
-    this.tagItems = this.tagItems.map(tagItem => {
-      tagItem.galleryData.items.sort((item1, item2) => {
-        const rating1 = Number(item1['rating']) || 0;
-        const rating2 = Number(item2['rating']) || 0;
-        if (rating1 != rating2) {
-          return rating1 > rating2 ? -1 : 1;
-        }
-        return item1.name.localeCompare(item2.name);
-      });
-      return tagItem; 
-    })
+    this.sortShowsBy('rating', 'desc');
+  }
+
+  sortShowsByTeleramaRating(): void {
+    this.sortShowsBy('teleramaRating', 'desc');
   }
 
   sortShowsByDuration(): void {
+    this.sortShowsBy('duration', 'asc');
+  }
+
+  private sortShowsBy(criterion: string, order: 'asc' | 'desc' = 'desc'): void {
     this.tagItems = this.tagItems.map(tagItem => {
       tagItem.galleryData.items.sort((item1, item2) => {
-        const duration1 = Number(item1['duration']) || 0;
-        const duration2 = Number(item2['duration']) || 0;
-        if (duration1 != duration2) {
-          return duration1 > duration2 ? 1 : -1;
+        const value1 = item1[criterion];
+        const value2 = item2[criterion];
+        if (value1 != value2) {
+          if (order === 'desc') {
+            return value1 > value2 ? -1 : 1;
+          } else {
+            return value1 > value2 ? 1 : -1;
+          }
         }
         return item1.name.localeCompare(item2.name);
       });
       return tagItem;
-    })
+    });
   }
 
   hideWatchedShows: boolean = true;
