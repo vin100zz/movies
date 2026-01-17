@@ -45,7 +45,7 @@ export class SearchComponent implements OnInit {
               type: 'M',
               name: dto.title,
               releaseYear: (dto.release_date || '').substr(0, 4),
-              rating: dto.vote_average,
+              rating: dto.vote_average ? Number(dto.vote_average).toFixed(1) : null,
               picture: dto.poster_path,
               link: '/show/M/' + dto.id,
               onerror: 'this.src="assets/empty-show.jpg"'
@@ -55,7 +55,7 @@ export class SearchComponent implements OnInit {
               type: 'S',
               name: dto.name,
               releaseYear: (dto.first_air_date || '').substr(0, 4),
-              rating: dto.vote_average,
+              rating: dto.vote_average ? Number(dto.vote_average).toFixed(1) : null,
               picture: dto.poster_path,
               link: '/show/S/' + dto.id,
               onerror: 'this.src="assets/empty-show.jpg"'

@@ -59,7 +59,7 @@ export class TagsComponent implements OnInit {
             link: `/show/${show.type === Movie.TYPE ? 'M' : 'S'}/${show.id}`,
             picture: show.picture,
             name: show.title,
-            rating: show.rating,
+            rating: show.rating ? Number(show.rating).toFixed(1) : null,
             releaseYear: show.releaseYear,
             duration: show.duration,
             watched: show.watched

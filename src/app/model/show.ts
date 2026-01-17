@@ -146,7 +146,7 @@ export class Show {
     this.translatedTitle = originalTitle != title ? (originalLanguage == 'fr' ? title : originalTitle) : null;
 
     this.overview = data['overview'];
-    this.rating = data['vote_average'];
+    this.rating = data['vote_average'] ? Number(data['vote_average']).toFixed(1) : null;
 
     this.backgroundPath = data['backdrop_path'];
     this.posterPath = 'http://image.tmdb.org/t/p/w500/' + data['poster_path'];
