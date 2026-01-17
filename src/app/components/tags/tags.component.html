@@ -13,21 +13,27 @@
   <i class="fas fa-plus"></i>
 </div>
 
-<div class="action-button sort-shows" (click)="sortShows()">
+<div class="action-button sort-tags sort-tags-by-rating" (click)="sortShowsByRating()">
   <i class="fas fa-sort"></i>
+  <span class="button-label">7.4</span>
+</div>
+
+<div class="action-button sort-tags sort-tags-by-duration" (click)="sortShowsByDuration()">
+  <i class="fas fa-sort"></i>
+  <span class="button-label">96'</span>
 </div>
 
 <div class="action-button toggle-watched" (click)="toggleWatched()">
   <i class="fas fa-check"></i>
 </div>
 
-<div class="action-button show-reorder" (click)="showReorderPopup()">
+<div class="action-button show-reorder-tags" (click)="showReorderTagsPopup()">
   <i class="fas fa-sort"></i>
 </div>
 
-<div *ngIf="isShowReorderPopup" class="reorder">
+<div *ngIf="isShowReorderTagsPopup" class="reorder">
   <div class="reorder-container">
-    <i class="fas fa-times close-reorder" (click)="closeReorderPopup()"></i>
+    <i class="fas fa-times close-reorder" (click)="closeReorderTagsPopup()"></i>
     <div cdkDropList class="reorder-list" (cdkDropListDropped)="drop($event)">
       <div class="reorder-box" *ngFor="let item of tagItems" cdkDrag>
         <div class="reorder-custom-placeholder" *cdkDragPlaceholder></div>

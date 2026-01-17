@@ -1,6 +1,6 @@
 {
   "/server": {
-    "target": "http://localhost/edsa-www/movies/",
+    "target": "http://127.0.0.1/edsa-messites/babouch/ve/movies/",
     "secure": false
   }
 }

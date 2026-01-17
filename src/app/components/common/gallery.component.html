@@ -1,6 +1,6 @@
 <ul *ngIf="data && data.items" class="app-gallery {{data.display}}">
-  <li *ngFor="let item of data.items">
-    <ng-container *ngIf="!item.watched || !this.data.hideWatchedShows">
+  <ng-container *ngFor="let item of data.items">
+    <li *ngIf="!item.watched || !this.data.hideWatchedShows">
       <a target="_blank" routerLink="{{item.link}}">
         <img [src]="item.picture" onerror="this.src='assets/empty-show.jpg'" />
         <div *ngIf="data.mode === 'show'" class="poster-mark" [ngClass]="getPosterMark(item.showId, item.showType)"></div>
@@ -13,6 +13,6 @@
         </div>
         <div *ngIf="data.mode === 'person'" class="role">{{item.character}}</div>
       </a>
-    </ng-container>
-  </li>
+    </li>
+  </ng-container>
 </ul>

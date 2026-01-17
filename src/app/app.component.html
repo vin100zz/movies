@@ -1,10 +1,18 @@
 <div class="app-container">
   <div class="app-header">
     <div class="title">My Watchlists</div>
+    <div class="switch-container">
+      <label class="switch">
+        <input type="checkbox" [checked]="showTypeFilter === 'S'" (change)="onSwitchToggle()">
+        <span class="slider"></span>
+      </label>
+      <span class="switch-label switch-label-1" *ngIf="showTypeFilter === 'S'">S</span>
+      <span class="switch-label switch-label-2 active" *ngIf="showTypeFilter === 'M'">M</span>
+    </div>
     <ul>
-      <li (click)="onResync()">
-        <i class="fas fa-sync"></i>
-      </li>
+<!--      <li (click)="onResync()">-->
+<!--        <i class="fas fa-sync"></i>-->
+<!--      </li>-->
       <li>
         <a routerLink="/" class="">
           <i class="fas fa-tags"></i>

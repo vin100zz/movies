@@ -21,20 +21,32 @@
   background: royalblue;
 }
 .create-tag {
-  right: 195px;
+  right: 255px;
   background: brown;
 }
-.sort-shows {
-  right: 135px;
+.sort-tags-by-rating {
+  right: 195px;
 }
-.sort-shows i {
-  transform: rotate(90deg);
+.sort-tags-by-duration {
+  right: 135px;
 }
 .toggle-watched {
   right: 75px;
 }
-.show-reorder {
+.show-reorder-tags {
   right: 15px;
+}
+.sort-tags i {
+  position: absolute;
+  top: 10px;
+  left: 18px;
+  transform: rotate(90deg);
+}
+.sort-tags .button-label {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 10px;
 }
 
 .reorder {

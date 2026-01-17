@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ShowService } from './services/show.service';
+import { FilterService } from './services/filter.service';
 
 
 @Component({
@@ -9,10 +10,17 @@ import { ShowService } from './services/show.service';
 })
 export class AppComponent {
   title = 'movies';
+  showTypeFilter: 'M' | 'S' = 'M';
 
   constructor(
-    private showService: ShowService
+    private showService: ShowService,
+    private filterService: FilterService
   ) { }
+
+  onSwitchToggle() {
+    this.showTypeFilter = this.showTypeFilter === 'M' ? 'S' : 'M';
+    this.filterService.setShowTypeFilter(this.showTypeFilter);
+  }
 
   onResync() {
     this.showService.listShowsWithTags().subscribe(shows => {
