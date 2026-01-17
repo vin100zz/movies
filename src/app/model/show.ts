@@ -110,6 +110,8 @@ export class Show {
 
   watched: boolean;
 
+  teleramaRating: number;
+
   genres: string[];
 
   similars: LightShow[] = [];
@@ -126,11 +128,12 @@ export class Show {
   nbSeasons: number;
   nbEpisodes: number;
 
-  constructor(data: Object, type: string, watched: boolean, tags: string[]) {
+  constructor(data: Object, type: string, watched: boolean, tags: string[], teleramaRating: number) {
     this.data = data;
     this.type = type;
 
     this.watched = watched;
+    this.teleramaRating = teleramaRating;
 
     this.id = data['id'];
 

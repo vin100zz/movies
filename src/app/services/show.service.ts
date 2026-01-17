@@ -102,8 +102,21 @@ export class ShowService {
     return this.httpClient.get<T>('server/set_watched.php?ts=' + Date.now() + '&type=' + show.type + '&id=' + show.id + '&watched=' + !show.watched).pipe(map(mapDtoFn));
   }
 
+  setTeleramaRating(show: Show, rating: number): Observable<Show> {
+    if (show.type === Movie.TYPE) {
+      return this.setTeleramaRatingAs<Movie>(show, rating, this.mapMovieDto);
+    }
+    return this.setTeleramaRatingAs<Serie>(show, rating, this.mapSerieDto);
+  }
+
+  setTeleramaRatingAs<T>(show: Show, rating: number, mapDtoFn: (dto: Object) => T): Observable<T> {
+    const ratingParam = rating !== null ? rating : '';
+    return this.httpClient.get<T>('server/set_telerama_rating.php?ts=' + Date.now() + '&type=' + show.type + '&id=' + show.id + '&rating=' + ratingParam).pipe(map(mapDtoFn));
+  }
+
   mapMovieDto(dto: Object): Movie {
-    return new Movie(dto['data'], dto['watched'] === 'true', dto['tags']);
+    const teleramaRating = dto['telerama_rating'] ? parseInt(dto['telerama_rating'], 10) : null;
+    return new Movie(dto['data'], dto['watched'] === 'true', dto['tags'], teleramaRating);
   }
 
   mapMovieData(data: Object): Movie {
@@ -111,7 +124,8 @@ export class ShowService {
   }
 
   mapSerieDto(dto: Object): Serie {
-    return new Serie(dto['data'], dto['watched'] === 'true', dto['tags']);
+    const teleramaRating = dto['telerama_rating'] ? parseInt(dto['telerama_rating'], 10) : null;
+    return new Serie(dto['data'], dto['watched'] === 'true', dto['tags'], teleramaRating);
   }
 
   mapSerieData(data: Object): Serie {

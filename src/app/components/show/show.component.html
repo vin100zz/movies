@@ -55,6 +55,24 @@
       <a *ngIf="youtubeLink" [href]="youtubeLink" class="youtube">
         <i class="fab fa-youtube"></i>
       </a>
+
+      <div class="telerama-rating">
+        <div *ngIf="show.teleramaRating" class="telerama-display" (click)="toggleEditTelerama()">
+          <img [src]="'https://www.telerama.fr/dist/assets/img/icons/notation/notation-' + show.teleramaRating + '.svg'" alt="Note Télérama: {{show.teleramaRating}}" class="telerama-icon">
+        </div>
+        <div *ngIf="!show.teleramaRating" class="telerama-edit-icon" (click)="toggleEditTelerama()">
+          <i class="fas fa-pen"></i>
+        </div>
+        <div *ngIf="editingTelerama" class="telerama-dropdown">
+          <div *ngFor="let rating of teleramaRatings" (click)="setTeleramaRating(rating)" class="telerama-option">
+            <img [src]="'https://www.telerama.fr/dist/assets/img/icons/notation/notation-' + rating + '.svg'" alt="Note: {{rating}}" class="telerama-icon-small">
+          </div>
+          <div (click)="clearTeleramaRating()" class="telerama-option telerama-clear">
+            Effacer
+          </div>
+        </div>
+      </div>
+
       <div class="button watched" [ngClass]="show.watched ? 'active' : 'inactive'" (click)="toggleWatched()">
         <i class="fas fa-check"></i>
       </div>

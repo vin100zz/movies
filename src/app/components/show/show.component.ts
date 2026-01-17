@@ -33,6 +33,10 @@ export class ShowComponent implements OnInit {
 
   googleLink: SafeResourceUrl;
 
+  teleramaRatings: number[] = [1, 2, 3, 4, 5];
+
+  editingTelerama: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -145,6 +149,24 @@ export class ShowComponent implements OnInit {
 
   getTag(tagId: string): Tag {
     return this.tags.find(t => t.id === tagId);
+  }
+
+  toggleEditTelerama(): void {
+    this.editingTelerama = !this.editingTelerama;
+  }
+
+  setTeleramaRating(rating: number): void {
+    this.showService.setTeleramaRating(this.show, rating).subscribe(show => {
+      this.show = show;
+      this.editingTelerama = false;
+    });
+  }
+
+  clearTeleramaRating(): void {
+    this.showService.setTeleramaRating(this.show, null).subscribe(show => {
+      this.show = show;
+      this.editingTelerama = false;
+    });
   }
 
 }

@@ -4,8 +4,8 @@ export class Serie extends Show {
   static TYPE: string = 'S';
   static TMDB_KEY = 'tv';
 
-  constructor(data: Object, watched: boolean, tags: string[]) {
-    super(data, Serie.TYPE, watched, tags);
+  constructor(data: Object, watched: boolean, tags: string[], teleramaRating: number = null) {
+    super(data, Serie.TYPE, watched, tags, teleramaRating);
 
     this.firstYear = parseInt((data['first_air_date'] || '').substr(0, 4), 10);
     this.lastYear = parseInt((data['last_air_date'] || '').substr(0, 4), 10);
