@@ -121,3 +121,16 @@ i {
 .show-type-corner-S:before {
   content: 'S';
 }
+.telerama-corner {
+  position: absolute;
+  right: 0;
+  top: 140px;
+  height: 10px;
+  width: auto;
+  display: block;
+}
+.telerama-corner img {
+  height: 10px;
+  width: auto;
+  display: block;
+}

@@ -58,7 +58,7 @@
 
       <div class="telerama-rating">
         <div *ngIf="show.teleramaRating" class="telerama-display" (click)="toggleEditTelerama()">
-          <img [src]="'https://www.telerama.fr/dist/assets/img/icons/notation/notation-' + show.teleramaRating + '.svg'" alt="Note Télérama: {{show.teleramaRating}}" class="telerama-icon">
+          <img [src]="'https://www.telerama.fr/dist/assets/img/icons/notation/notation-' + show.teleramaRating + '.svg'" class="telerama-icon">
         </div>
         <div *ngIf="!show.teleramaRating" class="telerama-edit-icon" (click)="toggleEditTelerama()">
           <i class="fas fa-pen"></i>

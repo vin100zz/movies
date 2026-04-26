@@ -23,7 +23,7 @@
   display: block;
   text-decoration: none;
 }
-.app-gallery li img {
+.app-gallery li .show-picture {
   width: 100px;
   height: 150px;
   object-fit: cover;
@@ -47,14 +47,7 @@
 }
 .app-gallery li .role > span {
   display: inline-block;
-  margin: 0 2px;
-}
-.app-gallery li .telerama-rating:after {
-  content: 'T';
-  color: white;
-  background: #666;
-  padding: 0 1px;
-  margin-left: 2px
+  margin: 0 5px;
 }
 
 .app-gallery .poster-mark {
