@@ -1,16 +1,18 @@
-<ul *ngIf="data && data.items" class="app-gallery {{data.display}}">
-  <ng-container *ngFor="let item of data.items">
-    <li *ngIf="!item.watched || !this.data.hideWatchedShows">
-      <a target="_blank" routerLink="{{item.link}}">
-        <img [src]="item.picture" onerror="this.src='assets/empty-show.jpg'" />
-        <div *ngIf="data.mode === 'show'" class="poster-mark" [ngClass]="getPosterMark(item.showId, item.showType)"></div>
-        <div *ngIf="data.mode === 'show'" class="show-type-corner show-type-corner-{{item.showType}}"></div>
+<ul *ngIf="data && data.items" [class]="'app-gallery ' + data.display">
+  <ng-container *ngFor="let item of data.items; trackBy: trackByItem">
+    <li *ngIf="!item.watched || !data.hideWatchedShows">
+      <a target="_blank" [routerLink]="item.link">
+        <img class="show-picture" [src]="item.picture" onerror="this.src='assets/empty-show.jpg'" />
+        <div *ngIf="data.mode === 'show'" class="poster-mark" [ngClass]="posterMarkMap.get(item.showId + '_' + item.showType)"></div>
+        <div *ngIf="data.mode === 'show'" [class]="'show-type-corner show-type-corner-' + item.showType"></div>
+        <div *ngIf="item.teleramaRating" class="telerama-corner">
+          <img [src]="'https://www.telerama.fr/dist/assets/img/icons/notation/notation-' + item.teleramaRating + '.svg'" class="telerama-icon">
+        </div>
         <div class="name">{{item.name}}</div>
         <div *ngIf="data.mode === 'show'" class="role">
             <span *ngIf="item.releaseYear">{{item.releaseYear}}</span>
-            <span><i class="fas fa-star"></i>{{item.rating}}</span>
-            <span *ngIf="item.teleramaRating" class="telerama-rating">{{item.teleramaRating-1}}</span>
             <span *ngIf="item.duration">{{item.duration}}'</span>
+            <span><i class="fas fa-star"></i>{{item.rating}}</span>
         </div>
         <div *ngIf="data.mode === 'person'" class="role">{{item.character}}</div>
       </a>
