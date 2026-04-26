@@ -121,13 +121,13 @@ function saveShow($id, $type, $title, $data) {
     $json = json_decode($data, true);
     $json = stripShowData($json);
 
-    $title = str_replace("'", "''", utf8_decode($title));
+    $title = str_replace("'", "''", $title);
     $year = substr($type === "M" ? $json["release_date"] : $json["first_air_date"], 0, 4);
     $rating = $json["vote_average"];
     $duration = isset($json["runtime"]) ? $json["runtime"] : '';
     $picture = $json["poster_path"];
 
-    $data = utf8_decode(json_encode($json));
+    $data = json_encode($json, JSON_UNESCAPED_UNICODE);
     $data = str_replace("'", "''", $data);
 
     $sqlDuration = $duration ? ("'$duration'") : "NULL";
@@ -140,13 +140,13 @@ function resyncShow($id, $type, $title, $data) {
   $json = json_decode($data, true);
   $json = stripShowData($json);
 
-  $title = str_replace("'", "''", utf8_decode($title));
+  $title = str_replace("'", "''", $title);
   $year = substr($type === "M" ? $json["release_date"] : $json["first_air_date"], 0, 4);
   $rating = $json["vote_average"];
   $duration = isset($json["runtime"]) ? $json["runtime"] : '';
   $picture = $json["poster_path"];
 
-  $data = utf8_decode(json_encode($json));
+  $data = json_encode($json, JSON_UNESCAPED_UNICODE);
   $data = str_replace("'", "''", $data);
 
   $sqlDuration = $duration ? ("'$duration'") : "NULL";
