@@ -11,6 +11,7 @@ import { PersonComponent } from './components/person/person.component';
 import { SearchComponent } from './components/search/search.component';
 import { ShowComponent } from "./components/show/show.component";
 import { TagsComponent } from './components/tags/tags.component';
+import { TopPeopleComponent } from './components/top-people/top-people.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 
@@ -23,7 +24,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     SearchComponent,
     PersonComponent,
     GalleryComponent,
-    LastWatchedComponent
+    LastWatchedComponent,
+    TopPeopleComponent
   ],
   imports: [
     AppRoutingModule,

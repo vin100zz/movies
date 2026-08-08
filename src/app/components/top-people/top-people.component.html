@@ -1,0 +1,33 @@
+
+<div class="body">
+  <div class="tabs">
+    <div class="tab" [class.active]="activeTab === 'directors'" (click)="activeTab = 'directors'">Réalisateurs</div>
+    <div class="tab" [class.active]="activeTab === 'actors'" (click)="activeTab = 'actors'">Acteurs</div>
+  </div>
+
+  <div class="app-section" *ngIf="activeTab === 'directors'">
+    <ul class="people-list">
+      <li *ngFor="let director of directors">
+        <div class="person-row" (click)="toggle(director)">
+          <i class="fas fa-chevron-right arrow" [class.expanded]="director.expanded"></i>
+          <a [routerLink]="['/person', director.personId]" class="person-name" (click)="$event.stopPropagation()">{{director.personName}}</a>
+          <span class="person-count">{{director.count}}</span>
+        </div>
+        <app-gallery *ngIf="director.expanded" [data]="director.galleryData"></app-gallery>
+      </li>
+    </ul>
+  </div>
+
+  <div class="app-section" *ngIf="activeTab === 'actors'">
+    <ul class="people-list">
+      <li *ngFor="let actor of actors">
+        <div class="person-row" (click)="toggle(actor)">
+          <i class="fas fa-chevron-right arrow" [class.expanded]="actor.expanded"></i>
+          <a [routerLink]="['/person', actor.personId]" class="person-name" (click)="$event.stopPropagation()">{{actor.personName}}</a>
+          <span class="person-count">{{actor.count}}</span>
+        </div>
+        <app-gallery *ngIf="actor.expanded" [data]="actor.galleryData"></app-gallery>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -34,6 +34,10 @@ export class ShowService {
     return this.httpClient.get<Object[]>('server/list_watched_shows.php?ts=' + Date.now()).pipe(map(arr => arr.map(LightShow.fromDto)));
   }
 
+  listTopPeople(): Observable<Object> {
+    return this.httpClient.get<Object>('server/list_top_people.php?ts=' + Date.now());
+  }
+
   save(show: Show): Observable<Show> {
     if (show.type === Movie.TYPE) {
       return this.saveAs<Movie>(show, this.mapMovieDto);

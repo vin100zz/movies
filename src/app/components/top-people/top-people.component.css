@@ -1,0 +1,60 @@
+
+.body {
+  padding: 10px;
+}
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px 0;
+  cursor: pointer;
+  color: #666;
+  text-transform: uppercase;
+  font-size: 90%;
+  border-bottom: 3px solid transparent;
+}
+.tab.active {
+  color: #111;
+  font-weight: bold;
+  border-bottom-color: royalblue;
+}
+.people-list li {
+  border-bottom: 1px solid #eee;
+}
+.people-list li:last-child {
+  border-bottom: none;
+}
+.person-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+}
+.person-row .arrow {
+  margin-right: 10px;
+  color: #666;
+  transition: transform 0.2s;
+}
+.person-row .arrow.expanded {
+  transform: rotate(90deg);
+}
+.person-name {
+  flex: 1;
+}
+.person-name:hover {
+  text-decoration: underline;
+}
+.person-count {
+  color: #666;
+  min-width: 24px;
+  margin-left: 10px;
+  text-align: right;
+}
+.people-list app-gallery {
+  display: block;
+  margin: 0 0 10px 24px;
+}

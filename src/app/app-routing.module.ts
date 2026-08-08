@@ -5,6 +5,7 @@ import { PersonComponent } from './components/person/person.component';
 import { SearchComponent } from './components/search/search.component';
 import { ShowComponent } from "./components/show/show.component";
 import { TagsComponent } from './components/tags/tags.component';
+import { TopPeopleComponent } from './components/top-people/top-people.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/tags', pathMatch: 'full' },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'tags', component: TagsComponent },
   { path: 'recent', component: LastWatchedComponent },
+  { path: 'top-people', component: TopPeopleComponent },
   { path: 'show/:type/:id', component: ShowComponent },
   { path: 'person/:id', component: PersonComponent }
 ];
