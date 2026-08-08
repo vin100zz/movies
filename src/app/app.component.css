@@ -14,7 +14,7 @@
 }
 .app-header .title {
   font-family: header;
-  padding-top: 12px;
+  padding-top: 7px;
 }
 
 .app-header .switch-container {
@@ -86,9 +86,10 @@
 }
 .app-header li {
   display: inline-block;
-  width: 45px;
+  width: 28px;
   text-align: center;
   padding-top: 4px;
+  margin: 0 4px;
 }
 .app-header i {
   font-size: 60%;

@@ -38,7 +38,8 @@ export class LightShow {
     public teleramaRating: number,
     public duration: number,
     public watched: boolean,
-    picture: string
+    picture: string,
+    public watchedAt: string = null
   ) {
     this.picture = 'http://image.tmdb.org/t/p/w500/' + picture;
   }
@@ -53,7 +54,8 @@ export class LightShow {
       dto.telerama_rating,
       dto.duration,
       dto.watched + '' === 'true',
-      dto.picture || dto.poster_path
+      dto.picture || dto.poster_path,
+      dto.watched_at || null
     );
   }
 }

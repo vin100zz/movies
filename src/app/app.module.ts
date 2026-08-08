@@ -6,6 +6,7 @@ import { NgbCarouselModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GalleryComponent } from './components/common/gallery.component';
+import { LastWatchedComponent } from './components/last-watched/last-watched.component';
 import { PersonComponent } from './components/person/person.component';
 import { SearchComponent } from './components/search/search.component';
 import { ShowComponent } from "./components/show/show.component";
@@ -21,7 +22,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ShowComponent,
     SearchComponent,
     PersonComponent,
-    GalleryComponent
+    GalleryComponent,
+    LastWatchedComponent
   ],
   imports: [
     AppRoutingModule,

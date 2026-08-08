@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LastWatchedComponent } from './components/last-watched/last-watched.component';
 import { PersonComponent } from './components/person/person.component';
 import { SearchComponent } from './components/search/search.component';
 import { ShowComponent } from "./components/show/show.component";
@@ -10,6 +11,7 @@ const routes: Routes = [
 
   { path: 'search', component: SearchComponent },
   { path: 'tags', component: TagsComponent },
+  { path: 'recent', component: LastWatchedComponent },
   { path: 'show/:type/:id', component: ShowComponent },
   { path: 'person/:id', component: PersonComponent }
 ];

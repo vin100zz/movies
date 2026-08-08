@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Movie } from '../model/movie';
 import { Serie } from '../model/serie';
-import { Show, ShowWithTags } from './../model/show';
+import { LightShow, Show, ShowWithTags } from './../model/show';
 
 
 const httpOptions = {
@@ -28,6 +28,10 @@ export class ShowService {
 
   listShowsWithTags(): Observable<ShowWithTags[]> {
     return this.httpClient.get<Object[]>('server/list_shows_with_tags.php?ts=' + Date.now()).pipe(map(arr => arr.map(ShowWithTags.fromDto)));
+  }
+
+  listLastWatched(): Observable<LightShow[]> {
+    return this.httpClient.get<Object[]>('server/list_watched_shows.php?ts=' + Date.now()).pipe(map(arr => arr.map(LightShow.fromDto)));
   }
 
   save(show: Show): Observable<Show> {
