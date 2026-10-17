@@ -5,6 +5,7 @@
       "name": "movies-dev",
       "runtimeExecutable": "npx",
       "runtimeArgs": ["ng", "serve", "--port", "4200"],
+      "env": { "NODE_OPTIONS": "--openssl-legacy-provider" },
       "port": 4200
     }
   ]
